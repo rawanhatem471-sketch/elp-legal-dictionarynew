@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ELP Legal Dictionary</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo-area">
+        <div class="logo-mark">ELP</div>
+
+        <div>
+            <h1>ELP Legal Dictionary</h1>
+            <span>Egyptian Legal Portal</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#dictionary">Dictionary</a>
+        <a href="#categories">Categories</a>
+        <a href="#favorites">Favorites</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="badge">LEGAL REFERENCE TOOL</span>
+
+        <h2>
+            Find the meaning of
+            <span>legal terms</span>
+            quickly.
+        </h2>
+
+        <p>
+            Search, browse and explore legal terminology
+            in English and Arabic.
+        </p>
+
+        <div class="main-search">
+
+            <input
+                type="text"
+                id="mainSearch"
+                placeholder="Search for a legal term..."
+                autocomplete="off"
+            >
+
+            <button id="searchBtn">
+                Search
+            </button>
+
+        </div>
+
+        <div class="quick-links">
+
+            <button data-action="showAll">
+                Browse All Terms
+            </button>
+
+            <button data-action="englishLetters">
+                A–Z
+            </button>
+
+            <button data-action="arabicLetters">
+                الحروف العربية
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DICTIONARY ================= -->
+
+<section class="dictionary-section" id="dictionary">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="section-label">EXPLORE</span>
+            <h2>Legal Dictionary</h2>
+
+            <p>
+                Search and browse legal terminology.
+            </p>
+        </div>
+
+        <div class="term-count">
+            <strong id="termCount">0</strong>
+            <span>terms available</span>
+        </div>
+
+    </div>
+
+
+    <!-- FILTER BAR -->
+
+    <div class="filter-box">
+
+        <div class="filter-search">
+
+            <input
+                type="text"
+                id="dictionarySearch"
+                placeholder="Search legal terms..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="filter-row">
+
+            <div class="filter-group">
+
+                <label>Category</label>
+
+                <select id="categoryFilter">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label>Language</label>
+
+                <select id="languageFilter">
+
+                    <option value="all">
+                        English & Arabic
+                    </option>
+
+                    <option value="english">
+                        English
+                    </option>
+
+                    <option value="arabic">
+                        العربية
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label>Sort</label>
+
+                <select id="sortFilter">
+
+                    <option value="az">
+                        A–Z
+                    </option>
+
+                    <option value="za">
+                        Z–A
+                    </option>
+
+                    <option value="recent">
+                        Recently Viewed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                id="clearFilters"
+                class="clear-btn"
+            >
+                Clear Filters
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CATEGORY BUTTONS -->
+
+    <div class="categories-area" id="categories">
+
+        <div class="categories-header">
+
+            <h3>Browse by Category</h3>
+
+            <span>
+                Choose a legal field
+            </span>
+
+        </div>
+
+        <div
+            class="category-buttons"
+            id="categoryButtons"
+        ></div>
+
+    </div>
+
+
+    <!-- LETTER FILTER -->
+
+    <div class="letters-area">
+
+        <div class="letters-title">
+
+            <h3>Browse by Letter</h3>
+
+            <span>
+                تصفح حسب الحرف
+            </span>
+
+        </div>
+
+
+        <div
+            class="letters"
+            id="englishLetters"
+        ></div>
+
+
+        <div
+            class="letters arabic-letters"
+            id="arabicLetters"
+        ></div>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div class="results-header">
+
+        <div>
+            <h3>Legal Terms</h3>
+
+            <span id="resultsMessage">
+                Browse the available terms below.
+            </span>
+        </div>
+
+        <button
+            id="showAllBtn"
+            class="secondary-btn"
+        >
+            Show All
+        </button>
+
+    </div>
+
+
+    <div
+        class="terms-grid"
+        id="termsGrid"
+    ></div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+        class="empty-state hidden"
+        id="emptyState"
+    >
+
+        <div class="empty-icon">⌕</div>
+
+        <h3>No exact match found</h3>
+
+        <p>
+            Try another keyword, category or letter.
+        </p>
+
+        <button
+            id="emptyClearBtn"
+            class="secondary-btn"
+        >
+            Clear Filters
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FAVORITES ================= -->
+
+<section
+    class="favorites-section"
+    id="favorites"
+>
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                YOUR TERMS
+            </span>
+
+            <h2>Saved Terms</h2>
+
+            <p>
+                Your favorite legal terms will appear here.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="terms-grid"
+        id="favoritesGrid"
+    ></div>
+
+</section>
+
+
+<!-- ================= FEATURED ================= -->
+
+<section class="featured-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                DISCOVER
+            </span>
+
+            <h2>Featured Legal Terms</h2>
+
+            <p>
+                Explore some useful legal terminology.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="terms-grid"
+        id="featuredGrid"
+    ></div>
+
+</section>
+
+</main>
+
+
+<!-- ================= MODAL ================= -->
+
+<div
+    class="modal-overlay hidden"
+    id="termModal"
+>
+
+    <div class="term-modal">
+
+        <button
+            class="modal-close"
+            id="modalClose"
+        >
+            ×
+        </button>
+
+
+        <span
+            class="modal-category"
+            id="modalCategory"
+        ></span>
+
+
+        <h2 id="modalEnglish"></h2>
+
+        <h3 id="modalArabic"></h3>
+
+
+        <div class="definition-box">
+
+            <span>Definition</span>
+
+            <p id="modalDefinition"></p>
+
+        </div>
+
+
+        <div class="translation-box">
+
+            <span>Arabic Translation</span>
+
+            <p id="modalTranslation"></p>
+
+        </div>
+
+
+        <button
+            class="favorite-modal-btn"
+            id="modalFavorite"
+        >
+            ☆ Add to Favorites
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <strong>
+                ELP Legal Dictionary
+            </strong>
+
+            <p>
+                Egyptian Legal Portal
+            </p>
+
+        </div>
+
+        <div>
+            <p>
+                © 2026 ELP Legal Dictionary Prototype
+            </p>
+
+            <p>
+                Developed for BIS R&amp;D Internship Program
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="disclaimer">
+
+        Prototype content is for training and demonstration
+        purposes only and should not be considered
+        authoritative legal advice.
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
