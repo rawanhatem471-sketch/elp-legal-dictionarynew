@@ -1,44 +1,65 @@
+/* =====================================================
+   ELP LEGAL DICTIONARY
+   MAIN STYLESHEET
+===================================================== */
+
+
+/* ================= VARIABLES ================= */
+
 :root {
 
-    --primary: #1261a0;
-    --primary-dark: #0d4777;
-    --primary-light: #eaf4fc;
+    --blue: #1261a0;
+    --blue-dark: #0c4777;
+    --blue-light: #eaf4fc;
+    --blue-soft: #f4f9fd;
 
     --text: #17324d;
-    --muted: #6c7f91;
+    --text-light: #667b8d;
 
-    --background: #f7faff;
     --white: #ffffff;
 
     --border: #dce7f0;
 
+    --background: #f8fbfe;
+
     --shadow:
-        0 8px 30px rgba(25, 70, 110, 0.08);
+        0 8px 30px rgba(18, 70, 110, 0.08);
 
 }
 
 
+/* ================= RESET ================= */
+
 * {
-    box-sizing: border-box;
+
     margin: 0;
+
     padding: 0;
+
+    box-sizing: border-box;
+
 }
 
 
 html {
+
     scroll-behavior: smooth;
+
 }
 
 
 body {
 
-    font-family: "Inter", "Cairo", sans-serif;
+    font-family:
+        "Inter",
+        "Cairo",
+        sans-serif;
 
     background:
         linear-gradient(
             180deg,
-            #f7faff 0%,
-            #ffffff 100%
+            #f8fbfe,
+            #ffffff
         );
 
     color: var(--text);
@@ -51,7 +72,9 @@ body {
 button,
 input,
 select {
-    font: inherit;
+
+    font-family: inherit;
+
 }
 
 
@@ -61,7 +84,11 @@ select {
 
     height: 78px;
 
-    background: rgba(255,255,255,0.96);
+    padding:
+        0 7%;
+
+    background:
+        rgba(255,255,255,0.97);
 
     border-bottom:
         1px solid var(--border);
@@ -72,21 +99,16 @@ select {
 
     justify-content: space-between;
 
-    padding:
-        0 7%;
-
     position: sticky;
 
     top: 0;
 
-    z-index: 50;
-
-    backdrop-filter: blur(10px);
+    z-index: 100;
 
 }
 
 
-.logo-area {
+.brand {
 
     display: flex;
 
@@ -97,7 +119,7 @@ select {
 }
 
 
-.logo-mark {
+.logo {
 
     width: 44px;
 
@@ -108,8 +130,8 @@ select {
     background:
         linear-gradient(
             135deg,
-            var(--primary),
-            #2f83c4
+            var(--blue),
+            #3286c4
         );
 
     color: white;
@@ -125,23 +147,25 @@ select {
 }
 
 
-.logo-area h1 {
+.brand-text h1 {
 
     font-size: 17px;
 
+    line-height: 1.2;
+
 }
 
 
-.logo-area span {
+.brand-text span {
+
+    color: var(--text-light);
 
     font-size: 11px;
 
-    color: var(--muted);
-
 }
 
 
-nav {
+.navigation {
 
     display: flex;
 
@@ -150,11 +174,11 @@ nav {
 }
 
 
-nav a {
+.navigation a {
 
     text-decoration: none;
 
-    color: #496275;
+    color: #4f6577;
 
     font-size: 14px;
 
@@ -163,9 +187,9 @@ nav a {
 }
 
 
-nav a:hover {
+.navigation a:hover {
 
-    color: var(--primary);
+    color: var(--blue);
 
 }
 
@@ -195,12 +219,11 @@ nav a:hover {
 }
 
 
-.badge,
-.section-label {
+.eyebrow {
 
-    color: var(--primary);
+    color: var(--blue);
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 700;
 
@@ -212,45 +235,45 @@ nav a:hover {
 .hero h2 {
 
     font-size:
-        clamp(38px, 5vw, 65px);
+        clamp(38px, 5vw, 64px);
 
-    line-height: 1.1;
+    line-height: 1.08;
+
+    letter-spacing: -2px;
 
     margin:
         18px 0;
-
-    letter-spacing: -2px;
 
 }
 
 
 .hero h2 span {
 
-    color: var(--primary);
+    color: var(--blue);
 
 }
 
 
 .hero p {
 
-    color: var(--muted);
+    color: var(--text-light);
 
     font-size: 17px;
 
-    max-width: 620px;
+    max-width: 650px;
 
 }
 
 
-/* SEARCH */
+/* ================= HERO SEARCH ================= */
 
-.main-search {
+.hero-search {
 
     margin-top: 35px;
 
-    display: flex;
-
     max-width: 720px;
+
+    padding: 7px;
 
     background: white;
 
@@ -259,14 +282,14 @@ nav a:hover {
 
     border-radius: 12px;
 
-    padding: 7px;
-
     box-shadow: var(--shadow);
+
+    display: flex;
 
 }
 
 
-.main-search input {
+.hero-search input {
 
     flex: 1;
 
@@ -277,23 +300,23 @@ nav a:hover {
     padding:
         14px 16px;
 
-    color: var(--text);
+    font-size: 14px;
 
 }
 
 
-.main-search button {
+.hero-search button {
 
     border: none;
 
-    background: var(--primary);
+    background: var(--blue);
 
     color: white;
 
-    padding:
-        0 25px;
-
     border-radius: 8px;
+
+    padding:
+        0 26px;
 
     cursor: pointer;
 
@@ -302,27 +325,36 @@ nav a:hover {
 }
 
 
-.quick-links {
+.hero-search button:hover {
 
-    margin-top: 18px;
+    background: var(--blue-dark);
+
+}
+
+
+/* ================= QUICK ACTIONS ================= */
+
+.quick-actions {
 
     display: flex;
 
     gap: 10px;
+
+    margin-top: 17px;
 
     flex-wrap: wrap;
 
 }
 
 
-.quick-links button {
+.quick-actions button {
 
     border:
         1px solid var(--border);
 
     background: white;
 
-    color: var(--primary);
+    color: var(--blue);
 
     padding:
         9px 15px;
@@ -332,6 +364,13 @@ nav a:hover {
     cursor: pointer;
 
     font-size: 13px;
+
+}
+
+
+.quick-actions button:hover {
+
+    background: var(--blue-light);
 
 }
 
@@ -348,7 +387,7 @@ nav a:hover {
 }
 
 
-.section-heading {
+.section-header {
 
     display: flex;
 
@@ -363,47 +402,54 @@ nav a:hover {
 }
 
 
-.section-heading h2 {
+.section-header h2 {
 
     font-size: 32px;
-
-    margin-top: 6px;
-
-}
-
-
-.section-heading p {
-
-    color: var(--muted);
 
     margin-top: 5px;
 
 }
 
 
-.term-count {
+.section-header p {
+
+    color: var(--text-light);
+
+    margin-top: 4px;
+
+}
+
+
+.term-counter {
 
     text-align: right;
 
-    color: var(--muted);
-
 }
 
 
-.term-count strong {
+.term-counter strong {
 
     display: block;
 
-    font-size: 28px;
+    color: var(--blue);
 
-    color: var(--primary);
+    font-size: 28px;
 
 }
 
 
-/* ================= FILTER ================= */
+.term-counter span {
 
-.filter-box {
+    color: var(--text-light);
+
+    font-size: 12px;
+
+}
+
+
+/* ================= FILTER PANEL ================= */
+
+.filter-panel {
 
     background: white;
 
@@ -419,7 +465,7 @@ nav a:hover {
 }
 
 
-.filter-search input {
+.dictionary-search input {
 
     width: 100%;
 
@@ -436,10 +482,9 @@ nav a:hover {
 }
 
 
-.filter-search input:focus {
+.dictionary-search input:focus {
 
-    border-color:
-        var(--primary);
+    border-color: var(--blue);
 
 }
 
@@ -448,18 +493,18 @@ nav a:hover {
 
     display: flex;
 
-    gap: 15px;
-
-    align-items: end;
+    gap: 14px;
 
     margin-top: 16px;
+
+    align-items: end;
 
     flex-wrap: wrap;
 
 }
 
 
-.filter-group {
+.filter-item {
 
     flex: 1;
 
@@ -468,22 +513,22 @@ nav a:hover {
 }
 
 
-.filter-group label {
+.filter-item label {
 
     display: block;
 
     font-size: 12px;
 
+    color: var(--text-light);
+
     font-weight: 700;
 
     margin-bottom: 6px;
 
-    color: var(--muted);
-
 }
 
 
-.filter-group select {
+.filter-item select {
 
     width: 100%;
 
@@ -499,20 +544,22 @@ nav a:hover {
 
     color: var(--text);
 
+    outline: none;
+
 }
 
 
-.clear-btn {
+.clear-button {
 
     padding:
-        11px 17px;
+        11px 16px;
 
     border:
-        1px solid #cddbe7;
+        1px solid var(--border);
 
     background: white;
 
-    color: var(--primary);
+    color: var(--blue);
 
     border-radius: 8px;
 
@@ -521,117 +568,117 @@ nav a:hover {
 }
 
 
-/* ================= CATEGORIES ================= */
+.clear-button:hover {
 
-.categories-area {
+    background: var(--blue-light);
+
+}
+
+
+/* ================= SUBSECTION ================= */
+
+.categories-section,
+.letters-section {
 
     margin-top: 45px;
 
 }
 
 
-.categories-header {
+.subsection-header {
 
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 
 }
 
 
-.categories-header h3 {
+.subsection-header h3 {
 
     font-size: 18px;
 
 }
 
 
-.categories-header span {
+.subsection-header span {
 
-    color: var(--muted);
+    color: var(--text-light);
 
-    font-size: 13px;
+    font-size: 12px;
 
 }
 
 
-.category-buttons {
+/* ================= CATEGORIES ================= */
+
+.category-list {
 
     display: flex;
 
-    flex-wrap: wrap;
-
     gap: 10px;
+
+    flex-wrap: wrap;
 
 }
 
 
-.category-btn {
+.category-button {
 
     background: white;
 
     border:
         1px solid var(--border);
 
+    border-radius: 9px;
+
     padding:
         10px 15px;
-
-    border-radius: 8px;
 
     cursor: pointer;
 
     color: var(--text);
+
+    text-align: left;
 
     transition: 0.2s;
 
 }
 
 
-.category-btn:hover,
-.category-btn.active {
+.category-button strong {
 
-    background: var(--primary-light);
+    font-size: 13px;
 
-    color: var(--primary);
+}
 
-    border-color:
-        #b9d7ed;
+
+.category-button small {
+
+    display: block;
+
+    font-family: "Cairo";
+
+    color: var(--text-light);
+
+    margin-top: 2px;
+
+}
+
+
+.category-button:hover,
+.category-button.active {
+
+    background: var(--blue-light);
+
+    border-color: #b8d6ec;
+
+    color: var(--blue);
 
 }
 
 
 /* ================= LETTERS ================= */
 
-.letters-area {
-
-    margin-top: 45px;
-
-}
-
-
-.letters-title {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    margin-bottom: 15px;
-
-}
-
-
-.letters-title span {
-
-    color: var(--muted);
-
-}
-
-
-.letters {
+.letter-list {
 
     display: flex;
 
@@ -642,60 +689,65 @@ nav a:hover {
 }
 
 
-.letter-btn {
+.letter-button {
 
     width: 38px;
 
     height: 38px;
-
-    background: white;
 
     border:
         1px solid var(--border);
 
     border-radius: 7px;
 
-    cursor: pointer;
+    background: white;
 
-    color: var(--primary);
+    color: var(--blue);
+
+    cursor: pointer;
 
     font-weight: 600;
 
 }
 
 
-.letter-btn:hover,
-.letter-btn.active {
+.letter-button:hover,
+.letter-button.active {
 
-    background: var(--primary);
+    background: var(--blue);
 
     color: white;
 
 }
 
 
-.arabic-letters {
-
-    margin-top: 12px;
+.arabic-letter-list {
 
     direction: rtl;
+
+    margin-top: 12px;
 
 }
 
 
 /* ================= RESULTS ================= */
 
-.results-header {
+.results-section {
 
     margin-top: 55px;
 
-    margin-bottom: 20px;
+}
+
+
+.results-header {
 
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
+
+    margin-bottom: 20px;
 
 }
 
@@ -707,23 +759,23 @@ nav a:hover {
 }
 
 
-.results-header span {
+.results-header p {
 
-    color: var(--muted);
+    color: var(--text-light);
 
     font-size: 13px;
 
 }
 
 
-.secondary-btn {
+.outline-button {
 
     border:
         1px solid var(--border);
 
     background: white;
 
-    color: var(--primary);
+    color: var(--blue);
 
     padding:
         9px 15px;
@@ -735,7 +787,14 @@ nav a:hover {
 }
 
 
-/* ================= CARDS ================= */
+.outline-button:hover {
+
+    background: var(--blue-light);
+
+}
+
+
+/* ================= TERMS GRID ================= */
 
 .terms-grid {
 
@@ -752,6 +811,8 @@ nav a:hover {
 }
 
 
+/* ================= TERM CARD ================= */
+
 .term-card {
 
     background: white;
@@ -759,17 +820,17 @@ nav a:hover {
     border:
         1px solid var(--border);
 
-    border-radius: 12px;
+    border-radius: 13px;
 
     padding: 22px;
 
     box-shadow:
         0 5px 20px
-        rgba(25,70,110,0.05);
+        rgba(18,70,110,0.05);
 
     transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 
 }
 
@@ -781,7 +842,7 @@ nav a:hover {
 
     box-shadow:
         0 12px 30px
-        rgba(25,70,110,0.11);
+        rgba(18,70,110,0.11);
 
 }
 
@@ -792,114 +853,147 @@ nav a:hover {
 
     justify-content: space-between;
 
-    align-items: start;
+    align-items: flex-start;
 
 }
 
 
 .category-tag {
 
-    font-size: 10px;
+    background: var(--blue-light);
 
-    color: var(--primary);
-
-    background: var(--primary-light);
+    color: var(--blue);
 
     padding:
         5px 8px;
 
     border-radius: 5px;
 
+    font-size: 10px;
+
     font-weight: 700;
 
 }
 
 
-.favorite-btn {
+.favorite-button {
 
     border: none;
 
-    background: none;
+    background: transparent;
 
     cursor: pointer;
 
-    font-size: 21px;
+    font-size: 22px;
 
-    color: #a4b3bf;
-
-}
-
-
-.favorite-btn.active {
-
-    color: #1261a0;
+    color: #9aabb8;
 
 }
 
 
-.term-card h3 {
+.favorite-button.active {
+
+    color: var(--blue);
+
+}
+
+
+/* ================= TERM NAME ================= */
+
+/*
+    IMPORTANT:
+    Arabic is ABOVE English.
+*/
+
+
+.term-name {
 
     margin-top: 20px;
 
-    font-size: 20px;
-
 }
 
 
-.arabic-term {
+.term-arabic {
 
-    font-family: "Cairo", sans-serif;
+    font-family:
+        "Cairo",
+        sans-serif;
 
     direction: rtl;
 
     text-align: left;
 
-    color: var(--primary);
+    color: var(--blue);
 
-    font-weight: 600;
-
-    margin-top: 4px;
-
-}
-
-
-.term-card p {
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    margin-top: 12px;
-
-}
-
-
-.view-btn {
-
-    margin-top: 17px;
-
-    border: none;
-
-    background: none;
-
-    color: var(--primary);
-
-    cursor: pointer;
+    font-size: 23px;
 
     font-weight: 700;
 
-    font-size: 13px;
+    line-height: 1.5;
 
 }
 
 
-/* ================= EMPTY ================= */
+.term-english {
+
+    margin-top: 1px;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+
+}
+
+
+.term-definition {
+
+    color: var(--text-light);
+
+    font-size: 13px;
+
+    margin-top: 13px;
+
+}
+
+
+.view-definition {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--blue);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 17px;
+
+}
+
+
+.view-definition:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* ================= EMPTY STATE ================= */
 
 .empty-state {
 
     text-align: center;
 
-    padding: 70px 20px;
+    padding:
+        70px 20px;
 
     border:
         1px dashed var(--border);
@@ -909,25 +1003,25 @@ nav a:hover {
 }
 
 
-.empty-icon {
+.empty-symbol {
 
-    font-size: 35px;
+    color: var(--blue);
 
-    color: var(--primary);
+    font-size: 38px;
 
 }
 
 
 .empty-state h3 {
 
-    margin-top: 10px;
+    margin-top: 8px;
 
 }
 
 
 .empty-state p {
 
-    color: var(--muted);
+    color: var(--text-light);
 
     margin:
         5px 0 18px;
@@ -946,8 +1040,7 @@ nav a:hover {
 
 .favorites-section {
 
-    background:
-        #f4f9fd;
+    background: var(--blue-soft);
 
 }
 
@@ -961,28 +1054,28 @@ nav a:hover {
     inset: 0;
 
     background:
-        rgba(10,30,50,0.45);
+        rgba(8,30,50,0.5);
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
+
+    align-items: center;
 
     padding: 20px;
 
-    z-index: 100;
+    z-index: 200;
 
 }
 
 
-.term-modal {
+.modal {
 
-    background: white;
+    width: 100%;
 
     max-width: 650px;
 
-    width: 100%;
+    background: white;
 
     border-radius: 16px;
 
@@ -1001,50 +1094,64 @@ nav a:hover {
 
     position: absolute;
 
-    top: 15px;
+    top: 12px;
 
     right: 18px;
 
     border: none;
 
-    background: none;
+    background: transparent;
 
-    font-size: 28px;
+    font-size: 29px;
+
+    color: var(--text-light);
 
     cursor: pointer;
-
-    color: var(--muted);
 
 }
 
 
 .modal-category {
 
-    color: var(--primary);
+    color: var(--blue);
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 700;
 
 }
 
 
-.term-modal h2 {
+/* Arabic first */
 
-    margin-top: 15px;
+.modal-arabic {
+
+    font-family: "Cairo";
+
+    direction: rtl;
+
+    text-align: left;
+
+    color: var(--blue);
 
     font-size: 30px;
+
+    font-weight: 700;
+
+    margin-top: 18px;
 
 }
 
 
-.term-modal h3 {
+/* English second */
 
-    font-family: "Cairo";
+.modal-english {
 
-    color: var(--primary);
+    font-size: 18px;
 
-    margin-top: 3px;
+    font-weight: 500;
+
+    margin-top: 0;
 
 }
 
@@ -1056,9 +1163,9 @@ nav a:hover {
 
     padding: 18px;
 
-    border-radius: 10px;
-
     background: var(--background);
+
+    border-radius: 10px;
 
 }
 
@@ -1066,11 +1173,21 @@ nav a:hover {
 .definition-box span,
 .translation-box span {
 
+    color: var(--blue);
+
     font-size: 11px;
 
     font-weight: 700;
 
-    color: var(--primary);
+}
+
+
+.definition-box p,
+.translation-box p {
+
+    margin-top: 6px;
+
+    color: var(--text-light);
 
 }
 
@@ -1081,21 +1198,23 @@ nav a:hover {
 
     direction: rtl;
 
+    text-align: left;
+
 }
 
 
-.favorite-modal-btn {
+.modal-favorite {
 
     margin-top: 22px;
 
-    border: none;
-
-    background: var(--primary);
-
-    color: white;
-
     padding:
         11px 17px;
+
+    border: none;
+
+    background: var(--blue);
+
+    color: white;
 
     border-radius: 8px;
 
@@ -1108,8 +1227,7 @@ nav a:hover {
 
 footer {
 
-    background:
-        #0e2940;
+    background: #0d2940;
 
     color: white;
 
@@ -1119,7 +1237,7 @@ footer {
 }
 
 
-.footer-content {
+.footer-main {
 
     display: flex;
 
@@ -1130,28 +1248,33 @@ footer {
 }
 
 
-.footer-content p {
+.footer-main p {
 
-    color:
-        #b9c8d4;
+    color: #b6c5d1;
 
     font-size: 12px;
 
 }
 
 
-.disclaimer {
+.footer-right {
 
-    border-top:
-        1px solid
-        rgba(255,255,255,0.15);
+    text-align: right;
+
+}
+
+
+.disclaimer {
 
     margin-top: 25px;
 
     padding-top: 20px;
 
-    color:
-        #aebdca;
+    border-top:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    color: #aebdca;
 
     font-size: 11px;
 
@@ -1164,43 +1287,64 @@ footer {
 
     .navbar {
 
-        padding: 0 5%;
+        padding:
+            0 5%;
 
     }
 
-    nav {
+
+    .navigation {
 
         display: none;
 
     }
 
-    .hero,
+
     .dictionary-section,
     .favorites-section,
     .featured-section {
 
         padding-left: 5%;
+
         padding-right: 5%;
 
     }
 
-    .section-heading {
 
-        flex-direction: column;
+    .hero {
 
-        align-items: start;
+        padding:
+            75px 5%;
 
     }
 
-    .term-count {
+
+    .section-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .term-counter {
 
         text-align: left;
 
     }
 
-    .footer-content {
+
+    .footer-main {
 
         flex-direction: column;
+
+    }
+
+
+    .footer-right {
+
+        text-align: left;
 
     }
 
@@ -1211,25 +1355,37 @@ footer {
 
     .hero h2 {
 
-        font-size: 37px;
+        font-size: 38px;
 
     }
 
-    .main-search {
+
+    .hero-search {
 
         flex-direction: column;
 
     }
 
-    .main-search button {
+
+    .hero-search button {
 
         padding: 13px;
 
     }
 
-    .filter-group {
+
+    .filter-item {
 
         min-width: 100%;
+
+    }
+
+
+    .results-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
 
     }
 
