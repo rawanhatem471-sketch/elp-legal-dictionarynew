@@ -1,6 +1,6 @@
 /* =====================================================
    ELP LEGAL DICTIONARY
-   Search + Filters + Arabic + Favorites
+   Smart Search + Categories + Recently Searched
 ===================================================== */
 
 
@@ -139,14 +139,13 @@ let currentLanguage = "all";
 let currentSearch = "";
 
 let favorites =
-    JSON.parse(
-        localStorage.getItem("elpFavorites")
-    ) || [];
+    JSON.parse(localStorage.getItem("elpFavorites")) || [];
 
 let recentlyViewed =
-    JSON.parse(
-        localStorage.getItem("elpRecentlyViewed")
-    ) || [];
+    JSON.parse(localStorage.getItem("elpRecentlyViewed")) || [];
+
+let recentlySearched =
+    JSON.parse(localStorage.getItem("elpRecentlySearched")) || [];
 
 let selectedTerm = null;
 
@@ -231,32 +230,39 @@ const modalTranslation =
 const modalFavorite =
     document.getElementById("modalFavorite");
 
+const recentSearchList =
+    document.getElementById("recentSearchList");
+
+const clearRecentSearches =
+    document.getElementById("clearRecentSearches");
+
 
 /* ================= INITIALIZATION ================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-        populateCategories();
+    populateCategories();
 
-        createEnglishLetters();
+    createEnglishLetters();
 
-        createArabicLetters();
+    createArabicLetters();
 
-        updateCategoryButtons();
+    updateCategoryButtons();
 
-        renderTerms();
+    updateLetterButtons();
 
-        renderFeatured();
+    renderTerms();
 
-        renderFavorites();
+    renderFeatured();
 
-    }
-);
+    renderFavorites();
+
+    renderRecentlySearched();
+
+});
 
 
-/* ================= TEXT NORMALIZATION ================= */
+/* ================= NORMALIZATION ================= */
 
 function normalizeText(text) {
 
@@ -268,15 +274,6 @@ function normalizeText(text) {
 
 }
 
-
-/*
-   Arabic normalization.
-
-   This makes searching more tolerant of:
-   أ / إ / آ
-   ة / ه
-   ى / ي
-*/
 
 function normalizeArabic(text) {
 
@@ -293,323 +290,438 @@ function normalizeArabic(text) {
 }
 
 
+/* ================= FUZZY SEARCH ================= */
+
+/*
+    Calculates how similar two words are.
+    This helps with small spelling mistakes.
+*/
+
+function levenshteinDistance(a, b) {
+
+    const matrix = [];
+
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
+
+    for (let j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
+
+    for (let i = 1; i <= b.length; i++) {
+
+        for (let j = 1; j <= a.length; j++) {
+
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+
+                matrix[i][j] =
+                    matrix[i - 1][j - 1];
+
+            } else {
+
+                matrix[i][j] =
+                    Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
+
+            }
+
+        }
+
+    }
+
+    return matrix[b.length][a.length];
+
+}
+
+
+function similarityScore(input, target) {
+
+    if (!input || !target) return 0;
+
+    input = normalizeText(input);
+    target = normalizeText(target);
+
+    if (input === target) return 1;
+
+    if (target.includes(input)) return 0.95;
+
+    if (input.includes(target)) return 0.9;
+
+    const distance =
+        levenshteinDistance(input, target);
+
+    const maxLength =
+        Math.max(input.length, target.length);
+
+    if (maxLength === 0) return 1;
+
+    return 1 - (distance / maxLength);
+
+}
+
+
+/* ================= SEARCH SCORE ================= */
+
+function getSearchScore(term, query) {
+
+    const english =
+        normalizeText(term.english);
+
+    const arabic =
+        normalizeArabic(term.arabic);
+
+    const category =
+        normalizeText(term.category);
+
+    const categoryArabic =
+        normalizeArabic(term.categoryArabic);
+
+    const definition =
+        normalizeText(term.definition);
+
+    const searchEnglish =
+        normalizeText(query);
+
+    const searchArabic =
+        normalizeArabic(query);
+
+    let score = 0;
+
+    /* Exact term */
+
+    if (
+        english === searchEnglish ||
+        arabic === searchArabic
+    ) {
+        score = 100;
+    }
+
+    /* Term contains query */
+
+    else if (
+        english.includes(searchEnglish) ||
+        arabic.includes(searchArabic)
+    ) {
+        score = 90;
+    }
+
+    /* Category match */
+
+    else if (
+        category.includes(searchEnglish) ||
+        categoryArabic.includes(searchArabic)
+    ) {
+        score = 85;
+    }
+
+    /* Definition match */
+
+    else if (
+        definition.includes(searchEnglish)
+    ) {
+        score = 70;
+    }
+
+    /* Fuzzy matching */
+
+    else {
+
+        const englishScore =
+            similarityScore(
+                searchEnglish,
+                english
+            );
+
+        const categoryScore =
+            similarityScore(
+                searchEnglish,
+                category
+            );
+
+        const arabicScore =
+            similarityScore(
+                searchArabic,
+                arabic
+            );
+
+        const arabicCategoryScore =
+            similarityScore(
+                searchArabic,
+                categoryArabic
+            );
+
+        const bestScore =
+            Math.max(
+                englishScore,
+                categoryScore,
+                arabicScore,
+                arabicCategoryScore
+            );
+
+        if (bestScore >= 0.55) {
+
+            score =
+                Math.round(
+                    bestScore * 80
+                );
+
+        }
+
+    }
+
+    return score;
+
+}
+
+
 /* ================= CATEGORIES ================= */
 
 function populateCategories() {
 
     if (!categoryFilter) return;
 
-    const categories =
-        [
-            ...new Set(
-                terms.map(
-                    term => term.category
-                )
-            )
-        ];
+    const categories = [
+        ...new Set(
+            terms.map(term => term.category)
+        )
+    ];
 
-    categories.forEach(
-        category => {
+    categories.forEach(category => {
 
-            const term =
-                terms.find(
-                    item =>
-                        item.category === category
-                );
+        const term =
+            terms.find(
+                item =>
+                    item.category === category
+            );
 
-            const option =
-                document.createElement("option");
+        const option =
+            document.createElement("option");
 
-            option.value = category;
+        option.value = category;
 
-            option.textContent =
-                `${category} — ${term.categoryArabic}`;
+        option.textContent =
+            `${category} — ${term.categoryArabic}`;
 
-            categoryFilter.appendChild(option);
+        categoryFilter.appendChild(option);
 
 
-            const button =
-                document.createElement("button");
+        const button =
+            document.createElement("button");
 
-            button.type = "button";
+        button.type = "button";
 
-            button.className =
-                "category-btn";
+        button.className =
+            "category-btn";
 
-            button.dataset.category =
+        button.dataset.category =
+            category;
+
+        button.innerHTML = `
+            <strong>${category}</strong>
+            <br>
+            <small>${term.categoryArabic}</small>
+        `;
+
+        button.addEventListener("click", () => {
+
+            currentCategory = category;
+
+            currentLetter = null;
+
+            categoryFilter.value =
                 category;
 
-            button.innerHTML = `
-                <strong>${category}</strong>
-                <br>
-                <small>${term.categoryArabic}</small>
-            `;
+            updateCategoryButtons();
 
+            updateLetterButtons();
 
-            button.addEventListener(
-                "click",
-                () => {
+            renderTerms();
 
-                    currentCategory =
-                        category;
+            scrollToResults();
 
-                    currentLetter =
-                        null;
+        });
 
-                    categoryFilter.value =
-                        category;
+        categoryButtons.appendChild(button);
 
-                    updateCategoryButtons();
-
-                    updateLetterButtons();
-
-                    renderTerms();
-
-                    scrollToResults();
-
-                }
-            );
-
-
-            categoryButtons.appendChild(
-                button
-            );
-
-        }
-    );
+    });
 
 }
 
-
-/* ================= CATEGORY ACTIVE ================= */
 
 function updateCategoryButtons() {
 
     document
         .querySelectorAll(".category-btn")
-        .forEach(
-            button => {
+        .forEach(button => {
 
-                button.classList.toggle(
-                    "active",
-                    button.dataset.category ===
-                    currentCategory
-                );
+            button.classList.toggle(
+                "active",
+                button.dataset.category ===
+                currentCategory
+            );
 
-            }
-        );
+        });
 
 }
 
 
-/* ================= ENGLISH LETTERS ================= */
+/* ================= LETTERS ================= */
 
 function createEnglishLetters() {
 
     const letters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-    letters.forEach(
-        letter => {
+    letters.forEach(letter => {
 
-            const button =
-                document.createElement("button");
+        const button =
+            document.createElement("button");
 
-            button.type = "button";
+        button.type = "button";
 
-            button.className =
-                "letter-btn";
+        button.className =
+            "letter-btn";
 
-            button.textContent =
-                letter;
+        button.textContent =
+            letter;
 
-            button.dataset.letter =
-                letter;
+        button.dataset.letter =
+            letter;
 
-            button.dataset.language =
+        button.dataset.language =
+            "english";
+
+        button.addEventListener("click", () => {
+
+            currentLetter = letter;
+
+            currentLanguage = "english";
+
+            currentSearch = "";
+
+            mainSearch.value = "";
+
+            dictionarySearch.value = "";
+
+            languageFilter.value =
                 "english";
 
+            updateLetterButtons();
 
-            button.addEventListener(
-                "click",
-                () => {
+            renderTerms();
 
-                    currentLetter =
-                        letter;
+            scrollToResults();
 
-                    currentLanguage =
-                        "english";
+        });
 
-                    currentSearch =
-                        "";
+        englishLettersContainer.appendChild(button);
 
-                    mainSearch.value =
-                        "";
-
-                    dictionarySearch.value =
-                        "";
-
-                    languageFilter.value =
-                        "english";
-
-                    updateLetterButtons();
-
-                    renderTerms();
-
-                    scrollToResults();
-
-                }
-            );
-
-
-            englishLettersContainer.appendChild(
-                button
-            );
-
-        }
-    );
+    });
 
 }
 
-
-/* ================= ARABIC LETTERS ================= */
 
 function createArabicLetters() {
 
     const letters = [
-
-        "ا",
-        "ب",
-        "ت",
-        "ث",
-        "ج",
-        "ح",
-        "خ",
-        "د",
-        "ذ",
-        "ر",
-        "ز",
-        "س",
-        "ش",
-        "ص",
-        "ض",
-        "ط",
-        "ظ",
-        "ع",
-        "غ",
-        "ف",
-        "ق",
-        "ك",
-        "ل",
-        "م",
-        "ن",
-        "ه",
-        "و",
-        "ي"
-
+        "ا","ب","ت","ث","ج","ح","خ",
+        "د","ذ","ر","ز","س","ش","ص",
+        "ض","ط","ظ","ع","غ","ف","ق",
+        "ك","ل","م","ن","ه","و","ي"
     ];
 
+    letters.forEach(letter => {
 
-    letters.forEach(
-        letter => {
+        const button =
+            document.createElement("button");
 
-            const button =
-                document.createElement("button");
+        button.type = "button";
 
-            button.type = "button";
+        button.className =
+            "letter-btn";
 
-            button.className =
-                "letter-btn";
+        button.textContent =
+            letter;
 
-            button.textContent =
-                letter;
+        button.dataset.letter =
+            letter;
 
-            button.dataset.letter =
-                letter;
+        button.dataset.language =
+            "arabic";
 
-            button.dataset.language =
+        button.addEventListener("click", () => {
+
+            currentLetter = letter;
+
+            currentLanguage = "arabic";
+
+            currentSearch = "";
+
+            mainSearch.value = "";
+
+            dictionarySearch.value = "";
+
+            languageFilter.value =
                 "arabic";
 
+            updateLetterButtons();
 
-            button.addEventListener(
-                "click",
-                () => {
+            renderTerms();
 
-                    currentLetter =
-                        letter;
+            scrollToResults();
 
-                    currentLanguage =
-                        "arabic";
+        });
 
-                    currentSearch =
-                        "";
+        arabicLettersContainer.appendChild(button);
 
-                    mainSearch.value =
-                        "";
-
-                    dictionarySearch.value =
-                        "";
-
-                    languageFilter.value =
-                        "arabic";
-
-                    updateLetterButtons();
-
-                    renderTerms();
-
-                    scrollToResults();
-
-                }
-            );
-
-
-            arabicLettersContainer.appendChild(
-                button
-            );
-
-        }
-    );
+    });
 
 }
 
-
-/* ================= LETTER ACTIVE ================= */
 
 function updateLetterButtons() {
 
     document
         .querySelectorAll(".letter-btn")
-        .forEach(
-            button => {
+        .forEach(button => {
 
-                button.classList.toggle(
-                    "active",
-                    button.dataset.letter ===
-                    currentLetter &&
-                    button.dataset.language ===
-                    currentLanguage
-                );
+            button.classList.toggle(
+                "active",
+                button.dataset.letter ===
+                currentLetter &&
+                button.dataset.language ===
+                currentLanguage
+            );
 
-            }
-        );
+        });
 
 }
 
 
-/* ================= SEARCH ================= */
+/* ================= SMART SEARCH ================= */
 
 function performSearch() {
 
-    currentSearch =
+    const query =
         mainSearch.value.trim();
 
-    dictionarySearch.value =
-        mainSearch.value;
+    currentSearch = query;
 
-    currentLetter =
-        null;
+    dictionarySearch.value = query;
+
+    currentLetter = null;
 
     updateLetterButtons();
+
+    if (query) {
+
+        saveRecentSearch(query);
+
+    }
 
     renderTerms();
 
@@ -629,9 +741,7 @@ mainSearch.addEventListener(
     event => {
 
         if (event.key === "Enter") {
-
             performSearch();
-
         }
 
     }
@@ -648,8 +758,7 @@ dictionarySearch.addEventListener(
         mainSearch.value =
             dictionarySearch.value;
 
-        currentLetter =
-            null;
+        currentLetter = null;
 
         updateLetterButtons();
 
@@ -668,8 +777,7 @@ categoryFilter.addEventListener(
         currentCategory =
             categoryFilter.value;
 
-        currentLetter =
-            null;
+        currentLetter = null;
 
         updateCategoryButtons();
 
@@ -688,8 +796,7 @@ languageFilter.addEventListener(
         currentLanguage =
             languageFilter.value;
 
-        currentLetter =
-            null;
+        currentLetter = null;
 
         updateLetterButtons();
 
@@ -713,97 +820,60 @@ sortFilter.addEventListener(
 
 function getFilteredTerms() {
 
-    let result =
-        [...terms];
+    let result = [...terms];
+
+    let isApproximateSearch = false;
 
 
-    /* ================= SEARCH ================= */
+    /* SEARCH */
 
     if (currentSearch) {
 
-        const searchEnglish =
-            normalizeText(
-                currentSearch
-            );
-
-        const searchArabic =
-            normalizeArabic(
-                currentSearch
-            );
-
+        const scoredResults =
+            result
+                .map(term => ({
+                    term: term,
+                    score:
+                        getSearchScore(
+                            term,
+                            currentSearch
+                        )
+                }))
+                .filter(item =>
+                    item.score >= 50
+                )
+                .sort(
+                    (a, b) =>
+                        b.score - a.score
+                );
 
         result =
-            result.filter(
-                term => {
-
-                    const english =
-                        normalizeText(
-                            term.english
-                        );
-
-                    const arabic =
-                        normalizeArabic(
-                            term.arabic
-                        );
-
-                    const definition =
-                        normalizeText(
-                            term.definition
-                        );
-
-                    const category =
-                        normalizeText(
-                            term.category
-                        );
-
-                    const categoryArabic =
-                        normalizeArabic(
-                            term.categoryArabic
-                        );
-
-                    return (
-
-                        english.includes(
-                            searchEnglish
-                        )
-
-                        ||
-
-                        arabic.includes(
-                            searchArabic
-                        )
-
-                        ||
-
-                        definition.includes(
-                            searchEnglish
-                        )
-
-                        ||
-
-                        category.includes(
-                            searchEnglish
-                        )
-
-                        ||
-
-                        categoryArabic.includes(
-                            searchArabic
-                        )
-
-                    );
-
-                }
+            scoredResults.map(
+                item => item.term
             );
+
+
+        /*
+            If the top result is not an exact
+            match, we consider it an approximate
+            result.
+        */
+
+        if (
+            scoredResults.length > 0 &&
+            scoredResults[0].score < 90
+        ) {
+
+            isApproximateSearch = true;
+
+        }
 
     }
 
 
-    /* ================= CATEGORY ================= */
+    /* CATEGORY */
 
-    if (
-        currentCategory !== "all"
-    ) {
+    if (currentCategory !== "all") {
 
         result =
             result.filter(
@@ -815,16 +885,9 @@ function getFilteredTerms() {
     }
 
 
-    /* ================= LANGUAGE ================= */
+    /* LANGUAGE */
 
-    /*
-       Language filter now actually affects
-       what the user searches/browses.
-    */
-
-    if (
-        currentLanguage === "english"
-    ) {
+    if (currentLanguage === "english") {
 
         result =
             result.filter(
@@ -834,10 +897,7 @@ function getFilteredTerms() {
 
     }
 
-
-    if (
-        currentLanguage === "arabic"
-    ) {
+    if (currentLanguage === "arabic") {
 
         result =
             result.filter(
@@ -848,69 +908,64 @@ function getFilteredTerms() {
     }
 
 
-    /* ================= LETTER ================= */
+    /* LETTER */
 
     if (currentLetter) {
 
-        if (
-            currentLanguage === "arabic"
-        ) {
+        if (currentLanguage === "arabic") {
 
             result =
-                result.filter(
-                    term => {
+                result.filter(term => {
 
-                        const arabic =
-                            normalizeArabic(
-                                term.arabic
-                            );
-
-                        const letter =
-                            normalizeArabic(
-                                currentLetter
-                            );
-
-                        return arabic.startsWith(
-                            letter
+                    const arabic =
+                        normalizeArabic(
+                            term.arabic
                         );
 
-                    }
-                );
+                    const letter =
+                        normalizeArabic(
+                            currentLetter
+                        );
 
-        }
+                    return arabic.startsWith(
+                        letter
+                    );
 
-        else {
+                });
+
+        } else {
 
             result =
-                result.filter(
-                    term => {
+                result.filter(term => {
 
-                        const english =
-                            normalizeText(
-                                term.english
-                            );
+                    const english =
+                        normalizeText(
+                            term.english
+                        );
 
-                        return english
-                            .toUpperCase()
-                            .startsWith(
-                                currentLetter
-                            );
+                    return english
+                        .toUpperCase()
+                        .startsWith(
+                            currentLetter
+                        );
 
-                    }
-                );
+                });
 
         }
 
     }
 
 
-    /* ================= SORT ================= */
+    /* SORT */
 
     const sort =
         sortFilter.value;
 
 
-    if (sort === "az") {
+    if (
+        sort === "az" &&
+        !currentSearch
+    ) {
 
         result.sort(
             (a, b) =>
@@ -922,7 +977,10 @@ function getFilteredTerms() {
     }
 
 
-    if (sort === "za") {
+    if (
+        sort === "za" &&
+        !currentSearch
+    ) {
 
         result.sort(
             (a, b) =>
@@ -936,77 +994,67 @@ function getFilteredTerms() {
 
     if (sort === "recent") {
 
-        result.sort(
-            (a, b) => {
+        result.sort((a, b) => {
 
-                const ai =
-                    recentlyViewed.indexOf(
-                        a.id
-                    );
+            const ai =
+                recentlyViewed.indexOf(a.id);
 
-                const bi =
-                    recentlyViewed.indexOf(
-                        b.id
-                    );
+            const bi =
+                recentlyViewed.indexOf(b.id);
 
+            const aPosition =
+                ai === -1
+                    ? Infinity
+                    : ai;
 
-                /*
-                   Viewed terms first.
-                   Never-viewed terms go last.
-                */
+            const bPosition =
+                bi === -1
+                    ? Infinity
+                    : bi;
 
-                const aPosition =
-                    ai === -1
-                        ? Infinity
-                        : ai;
+            return (
+                aPosition -
+                bPosition
+            );
 
-                const bPosition =
-                    bi === -1
-                        ? Infinity
-                        : bi;
-
-                return (
-                    aPosition -
-                    bPosition
-                );
-
-            }
-        );
+        });
 
     }
 
 
-    return result;
+    return {
+        result,
+        isApproximateSearch
+    };
 
 }
 
 
-/* ================= RENDER ================= */
+/* ================= RENDER TERMS ================= */
 
 function renderTerms() {
 
-    const result =
+    const {
+        result,
+        isApproximateSearch
+    } =
         getFilteredTerms();
 
 
     termCount.textContent =
         result.length;
 
-
-    termsGrid.innerHTML =
-        "";
+    termsGrid.innerHTML = "";
 
 
-    if (
-        result.length === 0
-    ) {
+    if (result.length === 0) {
 
         emptyState.classList.remove(
             "hidden"
         );
 
         resultsMessage.textContent =
-            "No terms match your current filters.";
+            `No results found for "${currentSearch}".`;
 
         return;
 
@@ -1018,8 +1066,21 @@ function renderTerms() {
     );
 
 
-    if (
-        currentSearch ||
+    if (currentSearch) {
+
+        if (isApproximateSearch) {
+
+            resultsMessage.textContent =
+                `Showing closest matches for "${currentSearch}".`;
+
+        } else {
+
+            resultsMessage.textContent =
+                `${result.length} matching term(s) found.`;
+
+        }
+
+    } else if (
         currentCategory !== "all" ||
         currentLetter ||
         currentLanguage !== "all"
@@ -1028,9 +1089,7 @@ function renderTerms() {
         resultsMessage.textContent =
             `${result.length} matching term(s) found.`;
 
-    }
-
-    else {
+    } else {
 
         resultsMessage.textContent =
             "Browse the available terms below.";
@@ -1038,15 +1097,13 @@ function renderTerms() {
     }
 
 
-    result.forEach(
-        term => {
+    result.forEach(term => {
 
-            termsGrid.appendChild(
-                createTermCard(term)
-            );
+        termsGrid.appendChild(
+            createTermCard(term)
+        );
 
-        }
-    );
+    });
 
 }
 
@@ -1063,16 +1120,8 @@ function createTermCard(term) {
 
 
     const isFavorite =
-        favorites.includes(
-            term.id
-        );
+        favorites.includes(term.id);
 
-
-    /*
-       IMPORTANT:
-       Arabic first
-       English second
-    */
 
     card.innerHTML = `
 
@@ -1105,21 +1154,17 @@ function createTermCard(term) {
 
         </div>
 
-
         <div class="arabic-term">
             ${term.arabic}
         </div>
-
 
         <span class="english-term">
             ${term.english}
         </span>
 
-
         <p>
             ${term.definition}
         </p>
-
 
         <button
             type="button"
@@ -1132,40 +1177,30 @@ function createTermCard(term) {
     `;
 
 
-    const favoriteButton =
-        card.querySelector(
-            ".favorite-btn"
+    card
+        .querySelector(".favorite-btn")
+        .addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+                toggleFavorite(term.id);
+
+            }
         );
 
 
-    favoriteButton.addEventListener(
-        "click",
-        event => {
+    card
+        .querySelector(".view-btn")
+        .addEventListener(
+            "click",
+            () => {
 
-            event.stopPropagation();
+                openModal(term);
 
-            toggleFavorite(
-                term.id
-            );
-
-        }
-    );
-
-
-    const viewButton =
-        card.querySelector(
-            ".view-btn"
+            }
         );
-
-
-    viewButton.addEventListener(
-        "click",
-        () => {
-
-            openModal(term);
-
-        }
-    );
 
 
     return card;
@@ -1177,21 +1212,17 @@ function createTermCard(term) {
 
 function renderFeatured() {
 
-    featuredGrid.innerHTML =
-        "";
-
+    featuredGrid.innerHTML = "";
 
     terms
         .slice(0, 6)
-        .forEach(
-            term => {
+        .forEach(term => {
 
-                featuredGrid.appendChild(
-                    createTermCard(term)
-                );
+            featuredGrid.appendChild(
+                createTermCard(term)
+            );
 
-            }
-        );
+        });
 
 }
 
@@ -1200,19 +1231,14 @@ function renderFeatured() {
 
 function toggleFavorite(id) {
 
-    if (
-        favorites.includes(id)
-    ) {
+    if (favorites.includes(id)) {
 
         favorites =
             favorites.filter(
-                item =>
-                    item !== id
+                item => item !== id
             );
 
-    }
-
-    else {
+    } else {
 
         favorites.push(id);
 
@@ -1221,9 +1247,7 @@ function toggleFavorite(id) {
 
     localStorage.setItem(
         "elpFavorites",
-        JSON.stringify(
-            favorites
-        )
+        JSON.stringify(favorites)
     );
 
 
@@ -1246,12 +1270,9 @@ function toggleFavorite(id) {
 }
 
 
-/* ================= RENDER FAVORITES ================= */
-
 function renderFavorites() {
 
-    favoritesGrid.innerHTML =
-        "";
+    favoritesGrid.innerHTML = "";
 
 
     const favoriteTerms =
@@ -1263,9 +1284,7 @@ function renderFavorites() {
         );
 
 
-    if (
-        favoriteTerms.length === 0
-    ) {
+    if (favoriteTerms.length === 0) {
 
         favoritesGrid.innerHTML = `
 
@@ -1296,15 +1315,13 @@ function renderFavorites() {
     }
 
 
-    favoriteTerms.forEach(
-        term => {
+    favoriteTerms.forEach(term => {
 
-            favoritesGrid.appendChild(
-                createTermCard(term)
-            );
+        favoritesGrid.appendChild(
+            createTermCard(term)
+        );
 
-        }
-    );
+    });
 
 }
 
@@ -1313,67 +1330,42 @@ function renderFavorites() {
 
 function openModal(term) {
 
-    selectedTerm =
-        term;
-
+    selectedTerm = term;
 
     modalCategory.textContent =
         `${term.category} — ${term.categoryArabic}`;
 
-
-    /*
-       Arabic FIRST
-    */
-
     modalArabic.textContent =
         term.arabic;
-
-
-    /*
-       English SECOND
-    */
 
     modalEnglish.textContent =
         term.english;
 
-
     modalDefinition.textContent =
         term.definition;
-
 
     modalTranslation.textContent =
         term.translation;
 
-
     updateModalFavorite();
-
 
     termModal.classList.remove(
         "hidden"
     );
 
-
-    addRecentlyViewed(
-        term.id
-    );
+    addRecentlyViewed(term.id);
 
 }
 
 
-/* ================= MODAL FAVORITE ================= */
-
 function updateModalFavorite() {
 
-    if (
-        !selectedTerm
-    ) return;
-
+    if (!selectedTerm) return;
 
     const isFavorite =
         favorites.includes(
             selectedTerm.id
         );
-
 
     modalFavorite.textContent =
         isFavorite
@@ -1382,8 +1374,6 @@ function updateModalFavorite() {
 
 }
 
-
-/* ================= CLOSE MODAL ================= */
 
 modalClose.addEventListener(
     "click",
@@ -1396,8 +1386,7 @@ termModal.addEventListener(
     event => {
 
         if (
-            event.target ===
-            termModal
+            event.target === termModal
         ) {
 
             closeModal();
@@ -1417,15 +1406,11 @@ function closeModal() {
 }
 
 
-/* ================= MODAL FAVORITE ================= */
-
 modalFavorite.addEventListener(
     "click",
     () => {
 
-        if (
-            selectedTerm
-        ) {
+        if (selectedTerm) {
 
             toggleFavorite(
                 selectedTerm.id
@@ -1436,8 +1421,6 @@ modalFavorite.addEventListener(
     }
 );
 
-
-/* ================= ESC CLOSE ================= */
 
 document.addEventListener(
     "keydown",
@@ -1464,22 +1447,13 @@ function addRecentlyViewed(id) {
 
     recentlyViewed =
         recentlyViewed.filter(
-            item =>
-                item !== id
+            item => item !== id
         );
 
-
-    recentlyViewed.unshift(
-        id
-    );
-
+    recentlyViewed.unshift(id);
 
     recentlyViewed =
-        recentlyViewed.slice(
-            0,
-            10
-        );
-
+        recentlyViewed.slice(0, 10);
 
     localStorage.setItem(
         "elpRecentlyViewed",
@@ -1491,39 +1465,156 @@ function addRecentlyViewed(id) {
 }
 
 
+/* ================= RECENTLY SEARCHED ================= */
+
+function saveRecentSearch(query) {
+
+    query = query.trim();
+
+    if (!query) return;
+
+
+    recentlySearched =
+        recentlySearched.filter(
+            item =>
+                item.toLowerCase() !==
+                query.toLowerCase()
+        );
+
+
+    recentlySearched.unshift(query);
+
+
+    recentlySearched =
+        recentlySearched.slice(0, 6);
+
+
+    localStorage.setItem(
+        "elpRecentlySearched",
+        JSON.stringify(
+            recentlySearched
+        )
+    );
+
+
+    renderRecentlySearched();
+
+}
+
+
+function renderRecentlySearched() {
+
+    if (!recentSearchList) return;
+
+
+    recentSearchList.innerHTML = "";
+
+
+    if (recentlySearched.length === 0) {
+
+        recentSearchList.innerHTML = `
+            <span class="no-recent-searches">
+                No recent searches yet.
+            </span>
+        `;
+
+        return;
+
+    }
+
+
+    recentlySearched.forEach(search => {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+            "recent-search-item";
+
+        button.innerHTML = `
+            <span class="recent-search-icon">⌕</span>
+            <span>${search}</span>
+        `;
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                mainSearch.value =
+                    search;
+
+                dictionarySearch.value =
+                    search;
+
+                currentSearch =
+                    search;
+
+                currentLetter =
+                    null;
+
+                updateLetterButtons();
+
+                renderTerms();
+
+                scrollToResults();
+
+            }
+        );
+
+
+        recentSearchList.appendChild(
+            button
+        );
+
+    });
+
+}
+
+
+if (clearRecentSearches) {
+
+    clearRecentSearches.addEventListener(
+        "click",
+        () => {
+
+            recentlySearched = [];
+
+            localStorage.removeItem(
+                "elpRecentlySearched"
+            );
+
+            renderRecentlySearched();
+
+        }
+    );
+
+}
+
+
 /* ================= CLEAR FILTERS ================= */
 
 function resetFilters() {
 
-    currentCategory =
-        "all";
+    currentCategory = "all";
 
-    currentLetter =
-        null;
+    currentLetter = null;
 
-    currentLanguage =
-        "all";
+    currentLanguage = "all";
 
-    currentSearch =
-        "";
+    currentSearch = "";
 
+    mainSearch.value = "";
 
-    mainSearch.value =
-        "";
+    dictionarySearch.value = "";
 
-    dictionarySearch.value =
-        "";
+    categoryFilter.value = "all";
 
+    languageFilter.value = "all";
 
-    categoryFilter.value =
-        "all";
-
-    languageFilter.value =
-        "all";
-
-    sortFilter.value =
-        "az";
-
+    sortFilter.value = "az";
 
     updateCategoryButtons();
 
@@ -1555,65 +1646,58 @@ showAllBtn.addEventListener(
 /* ================= QUICK BUTTONS ================= */
 
 document
-    .querySelectorAll(
-        "[data-action]"
-    )
-    .forEach(
-        button => {
+    .querySelectorAll("[data-action]")
+    .forEach(button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-                    const action =
-                        button.dataset.action;
+                const action =
+                    button.dataset.action;
 
-
-                    resetFilters();
+                resetFilters();
 
 
-                    if (
-                        action ===
-                        "englishLetters"
-                    ) {
+                if (
+                    action ===
+                    "englishLetters"
+                ) {
 
-                        englishLettersContainer
-                            .scrollIntoView({
-                                behavior:
-                                    "smooth"
-                            });
-
-                    }
-
-
-                    if (
-                        action ===
-                        "arabicLetters"
-                    ) {
-
-                        arabicLettersContainer
-                            .scrollIntoView({
-                                behavior:
-                                    "smooth"
-                            });
-
-                    }
-
-
-                    if (
-                        action ===
-                        "showAll"
-                    ) {
-
-                        scrollToResults();
-
-                    }
+                    englishLettersContainer
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
 
                 }
-            );
 
-        }
-    );
+
+                if (
+                    action ===
+                    "arabicLetters"
+                ) {
+
+                    arabicLettersContainer
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                }
+
+
+                if (
+                    action ===
+                    "showAll"
+                ) {
+
+                    scrollToResults();
+
+                }
+
+            }
+        );
+
+    });
 
 
 /* ================= HELPERS ================= */
@@ -1625,9 +1709,7 @@ function scrollToResults() {
             ".results-header"
         );
 
-
     if (!results) return;
-
 
     results.scrollIntoView({
         behavior: "smooth",
