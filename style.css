@@ -9,7 +9,7 @@
   --bg: #f5f7f9;
   --white: #ffffff;
   --success: #1d7950;
-  --shadow: 0 14px 35px rgba(12, 45, 74, .10);
+  --shadow: 0 14px 35px rgba(12,45,74,.10);
   --radius: 14px;
 }
 
@@ -25,7 +25,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: Inter, Cairo, Arial, sans-serif;
+  font-family: Cairo, Inter, Arial, sans-serif;
   line-height: 1.6;
 }
 
@@ -44,16 +44,15 @@ button {
   margin: auto;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+
+/* ================= HEADER ================= */
 
 .site-header {
-  background: var(--white);
+  background: white;
   position: sticky;
   top: 0;
   z-index: 20;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, .05);
+  box-shadow: 0 2px 15px rgba(0,0,0,.05);
 }
 
 .topbar {
@@ -86,7 +85,6 @@ button {
   background: var(--gold);
   color: var(--navy);
   font-weight: 800;
-  letter-spacing: -.5px;
 }
 
 .brand-copy {
@@ -110,18 +108,17 @@ button {
   flex-wrap: wrap;
 }
 
-.top-nav button,
-.main-links button {
+.top-nav button {
   border: 0;
   background: transparent;
-  color: inherit;
+  color: white;
   padding: 8px 10px;
   border-radius: 7px;
 }
 
-.top-nav .nav-link:hover,
-.top-nav .nav-link.active {
-  background: rgba(255, 255, 255, .12);
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(255,255,255,.12);
 }
 
 .nav-count {
@@ -133,10 +130,8 @@ button {
   font-weight: 800;
 }
 
-/* Language button hidden because interface is Arabic-first */
-.lang-btn {
-  display: none !important;
-}
+
+/* ================= MAIN NAV ================= */
 
 .main-nav {
   border-bottom: 1px solid var(--line);
@@ -174,13 +169,11 @@ button {
   line-height: 1.2;
 }
 
-.portal-title strong {
-  font-family: Cairo, sans-serif;
-}
-
 .portal-title small {
   color: var(--muted);
   font-size: .72rem;
+  direction: ltr;
+  text-align: right;
 }
 
 .main-links {
@@ -189,31 +182,24 @@ button {
 }
 
 .main-links button {
+  border: 0;
+  background: transparent;
   color: var(--navy);
   font-weight: 600;
+  padding: 8px 10px;
 }
 
 .main-links button:hover {
   color: var(--gold);
 }
 
-/* =========================================================
-   HERO
-========================================================= */
+
+/* ================= HERO ================= */
 
 .hero {
   background:
-    radial-gradient(
-      circle at 10% 20%,
-      rgba(201, 162, 75, .20),
-      transparent 26%
-    ),
-    linear-gradient(
-      135deg,
-      #0b2a45 0%,
-      #12446a 100%
-    );
-
+    radial-gradient(circle at 10% 20%, rgba(201,162,75,.20), transparent 26%),
+    linear-gradient(135deg, #0b2a45 0%, #12446a 100%);
   color: white;
   padding: 70px 0 76px;
   position: relative;
@@ -227,7 +213,7 @@ button {
   top: -150px;
   width: 430px;
   height: 430px;
-  border: 1px solid rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 50%;
 }
 
@@ -242,8 +228,7 @@ button {
 .eyebrow {
   color: var(--gold-light);
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   font-size: .75rem;
 }
 
@@ -265,7 +250,7 @@ button {
   padding: 7px;
   display: flex;
   align-items: center;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, .25);
+  box-shadow: 0 15px 45px rgba(0,0,0,.25);
   max-width: 800px;
   margin: auto;
 }
@@ -277,6 +262,7 @@ button {
   padding: 15px 16px;
   color: var(--ink);
   min-width: 0;
+  direction: rtl;
 }
 
 .search-box button {
@@ -288,13 +274,8 @@ button {
   font-weight: 800;
 }
 
-.search-box button:hover {
-  filter: brightness(.96);
-}
 
-/* =========================================================
-   QUICK ALPHABET
-========================================================= */
+/* ================= ALPHABET ================= */
 
 .quick-strip {
   background: white;
@@ -302,122 +283,61 @@ button {
 }
 
 .quick-strip-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 12px 0;
+  padding: 15px 0;
 }
 
 .quick-title {
   font-weight: 800;
   color: var(--navy);
-  white-space: nowrap;
+  margin-bottom: 8px;
 }
 
-/*
-   Alphabet container
-   Arabic row + English row
-*/
-
-.alphabet,
-.browse-alphabet {
+.alphabet-block {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.alphabet-row {
+  display: flex;
   gap: 4px;
+  flex-wrap: wrap;
   align-items: center;
+  direction: rtl;
 }
 
-.alphabet {
-  justify-content: flex-end;
+.alphabet-row.english-row {
+  direction: ltr;
 }
 
-/* Each alphabet button */
+.alphabet-label {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 800;
+  min-width: 42px;
+}
 
 .alpha-btn {
   border: 1px solid var(--line);
   background: white;
   color: var(--navy);
-
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-
-  border-radius: 6px;
-
-  font-weight: 700;
-  font-size: .75rem;
-
+  width: 29px;
+  height: 28px;
   padding: 0;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  transition:
-    background .18s ease,
-    color .18s ease,
-    border-color .18s ease,
-    transform .18s ease;
+  border-radius: 5px;
+  font-size: .73rem;
+  font-weight: 700;
 }
 
-.alpha-btn:hover {
-  background: #f0f4f7;
-  border-color: var(--navy);
-  transform: translateY(-1px);
-}
-
+.alpha-btn:hover,
 .alpha-btn.active {
   background: var(--navy);
   color: white;
   border-color: var(--navy);
 }
 
-/*
-   Bilingual alphabet support.
 
-   JS should create:
-
-   <button class="alpha-btn">
-      <span class="ar-letter">ا</span>
-      <span class="en-letter">A</span>
-   </button>
-*/
-
-.alpha-btn:has(.ar-letter) {
-  width: 34px;
-  min-width: 34px;
-  height: 42px;
-
-  flex-direction: column;
-  justify-content: center;
-
-  line-height: 1;
-  gap: 2px;
-}
-
-.alpha-btn .ar-letter {
-  font-family: Cairo, Arial, sans-serif;
-  font-size: .78rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.alpha-btn .en-letter {
-  font-family: Inter, Arial, sans-serif;
-  font-size: .62rem;
-  font-weight: 700;
-  line-height: 1;
-  opacity: .72;
-}
-
-.alpha-btn.active .en-letter {
-  opacity: 1;
-}
-
-/* =========================================================
-   SECTIONS
-========================================================= */
+/* ================= SECTIONS ================= */
 
 .section {
   padding: 54px 0;
@@ -453,9 +373,8 @@ button {
   color: var(--gold);
 }
 
-/* =========================================================
-   CATEGORIES
-========================================================= */
+
+/* ================= CATEGORIES ================= */
 
 .category-grid {
   display: grid;
@@ -468,8 +387,8 @@ button {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 20px;
-  text-align: left;
-  box-shadow: 0 4px 16px rgba(12, 45, 74, .04);
+  text-align: right;
+  box-shadow: 0 4px 16px rgba(12,45,74,.04);
   transition: .2s;
 }
 
@@ -501,37 +420,30 @@ button {
   font-size: .83rem;
 }
 
-/* =========================================================
-   TERM CARDS
-========================================================= */
+
+/* ================= TERMS ================= */
 
 .term-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 16px;
 }
 
 .term-card {
   background: white;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 20px;
-
+  border-radius: 12px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-
-  min-height: 215px;
-
-  box-shadow: 0 4px 16px rgba(12, 45, 74, .04);
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+  min-height: 170px;
+  box-shadow: 0 4px 16px rgba(12,45,74,.04);
+  transition: .2s;
 }
 
 .term-card:hover {
-  box-shadow: var(--shadow);
   transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .term-top {
@@ -543,18 +455,22 @@ button {
 
 .term-ar {
   font-family: Cairo, sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--navy);
   direction: rtl;
   text-align: right;
+  line-height: 1.4;
 }
 
 .term-en {
   color: var(--gold);
   font-weight: 700;
-  font-size: .92rem;
-  margin-top: 1px;
+  font-family: Inter, Arial, sans-serif;
+  direction: ltr;
+  text-align: right;
+  font-size: .82rem;
+  margin-top: 2px;
 }
 
 .badge {
@@ -563,24 +479,15 @@ button {
   background: #edf3f7;
   color: var(--navy);
   border-radius: 20px;
-  padding: 4px 9px;
-  font-size: .72rem;
+  padding: 3px 8px;
+  font-size: .68rem;
   font-weight: 700;
-  margin-top: 10px;
-}
-
-.term-card p {
-  color: var(--muted);
-  font-size: .88rem;
-  margin: 12px 0;
-
-  /* Keep card clean */
-  display: none;
+  margin-top: 8px;
 }
 
 .card-actions {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   margin-top: auto;
 }
 
@@ -588,9 +495,10 @@ button {
   border: 1px solid var(--line);
   background: white;
   color: var(--navy);
-  border-radius: 8px;
-  padding: 9px 13px;
+  border-radius: 7px;
+  padding: 7px 10px;
   font-weight: 700;
+  font-size: .78rem;
 }
 
 .btn:hover {
@@ -610,8 +518,8 @@ button {
 }
 
 .btn.icon {
-  width: 38px;
-  padding: 8px;
+  width: 34px;
+  padding: 6px;
 }
 
 .btn.saved {
@@ -619,9 +527,8 @@ button {
   border-color: var(--gold);
 }
 
-/* =========================================================
-   PAGE HEAD
-========================================================= */
+
+/* ================= PAGES ================= */
 
 .page-head {
   background: white;
@@ -629,20 +536,18 @@ button {
   padding: 42px 0 34px;
 }
 
-.page-head h1 {
+.page-head h1,
+.browse-head h1 {
   margin: 0;
   color: var(--navy);
   font-size: 2.1rem;
 }
 
-.page-head p {
+.page-head p,
+.browse-head p {
   color: var(--muted);
   margin: 6px 0 0;
 }
-
-/* =========================================================
-   SEARCH RESULTS
-========================================================= */
 
 .results-layout {
   display: grid;
@@ -663,7 +568,6 @@ button {
 .filters h3 {
   margin: 0 0 15px;
   color: var(--navy);
-  font-size: 1rem;
 }
 
 .filter-group {
@@ -688,11 +592,6 @@ button {
   background: white;
 }
 
-.filter-group select:focus,
-.filter-group input:focus {
-  border-color: var(--navy);
-}
-
 .results-toolbar {
   display: flex;
   justify-content: space-between;
@@ -706,7 +605,8 @@ button {
   font-size: .9rem;
 }
 
-.no-results {
+.no-results,
+.empty-state {
   background: white;
   border: 1px dashed #bfcbd4;
   padding: 45px 25px;
@@ -714,14 +614,32 @@ button {
   text-align: center;
 }
 
-.no-results h3 {
+.no-results h3,
+.empty-state h3 {
   color: var(--navy);
   margin: 0 0 6px;
 }
 
-/* =========================================================
-   DETAIL PAGE
-========================================================= */
+
+/* ================= BROWSE ================= */
+
+.browse-head {
+  background: white;
+  border-bottom: 1px solid var(--line);
+  padding: 38px 0;
+}
+
+.browse-alphabet {
+  margin-top: 20px;
+}
+
+.browse-alphabet .alpha-btn {
+  width: 35px;
+  height: 35px;
+}
+
+
+/* ================= DETAIL ================= */
 
 .detail-wrap {
   padding: 40px 0 65px;
@@ -742,12 +660,7 @@ button {
 }
 
 .detail-header {
-  background: linear-gradient(
-    135deg,
-    #0b2a45,
-    #12446a
-  );
-
+  background: linear-gradient(135deg, #0b2a45, #12446a);
   color: white;
   padding: 34px;
 }
@@ -770,7 +683,7 @@ button {
 }
 
 .detail-meta .badge {
-  background: rgba(255, 255, 255, .13);
+  background: rgba(255,255,255,.13);
   color: white;
 }
 
@@ -854,10 +767,6 @@ button {
   cursor: pointer;
 }
 
-.related-link:hover {
-  border-color: var(--navy);
-}
-
 .notice {
   background: #fff9eb;
   border: 1px solid #eedda9;
@@ -868,46 +777,8 @@ button {
   margin-top: 20px;
 }
 
-/* =========================================================
-   BROWSE PAGE
-========================================================= */
 
-.browse-head {
-  background: white;
-  border-bottom: 1px solid var(--line);
-  padding: 38px 0;
-}
-
-.browse-alphabet {
-  margin-top: 20px;
-}
-
-.browse-alphabet .alpha-btn {
-  width: 38px;
-  min-width: 38px;
-  height: 38px;
-}
-
-/* Bilingual buttons on Browse */
-
-.browse-alphabet .alpha-btn:has(.ar-letter) {
-  width: 43px;
-  min-width: 43px;
-  height: 46px;
-}
-
-.empty-state {
-  padding: 45px;
-  text-align: center;
-  color: var(--muted);
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
+/* ================= FOOTER ================= */
 
 .footer {
   background: #081f34;
@@ -954,19 +825,14 @@ button {
   padding: 4px 0;
 }
 
-.footer button:hover {
-  color: var(--gold-light);
-}
-
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, .1);
+  border-top: 1px solid rgba(255,255,255,.1);
   padding: 14px 0;
   font-size: .75rem;
 }
 
-/* =========================================================
-   TOAST
-========================================================= */
+
+/* ================= TOAST ================= */
 
 .toast {
   position: fixed;
@@ -990,91 +856,10 @@ button {
   transform: translateY(0);
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
 
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(5, 20, 32, .62);
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  z-index: 60;
-}
+/* ================= MOBILE ================= */
 
-.modal {
-  background: white;
-  width: min(560px, 100%);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 25px;
-}
-
-.modal h2 {
-  margin-top: 0;
-  color: var(--navy);
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-/* =========================================================
-   ARABIC / RTL
-========================================================= */
-
-.rtl {
-  direction: rtl;
-}
-
-.rtl .topbar-inner,
-.rtl .main-nav-inner {
-  direction: rtl;
-}
-
-.rtl .main-links {
-  direction: rtl;
-}
-
-.rtl .hero-content {
-  direction: rtl;
-}
-
-.rtl .footer-grid {
-  direction: rtl;
-  text-align: right;
-}
-
-.rtl .section-head {
-  direction: rtl;
-}
-
-.rtl .category-card {
-  text-align: right;
-}
-
-.rtl .search-box input {
-  direction: rtl;
-  text-align: right;
-}
-
-/* Alphabet itself stays visually organized */
-
-.rtl .alphabet,
-.rtl .browse-alphabet {
-  direction: ltr;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
 
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1095,17 +880,9 @@ button {
   .main-links {
     display: none;
   }
-
-  .quick-strip-inner {
-    align-items: flex-start;
-  }
-
-  .alphabet {
-    justify-content: flex-start;
-  }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
 
   .topbar-inner,
   .main-nav-inner {
@@ -1138,32 +915,6 @@ button {
     width: 100%;
   }
 
-  .alphabet {
-    justify-content: flex-start;
-    width: 100%;
-  }
-
-  .quick-strip-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .quick-title {
-    width: 100%;
-  }
-
-  .alpha-btn {
-    width: 29px;
-    min-width: 29px;
-    height: 29px;
-  }
-
-  .alpha-btn:has(.ar-letter) {
-    width: 32px;
-    min-width: 32px;
-    height: 39px;
-  }
-
   .detail-header,
   .detail-body {
     padding: 23px;
@@ -1177,63 +928,13 @@ button {
     padding: 40px 0;
   }
 
-  .section-head {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .results-toolbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 450px) {
-
-  .container {
-    width: 94%;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .alpha-btn {
-    width: 27px;
-    min-width: 27px;
-    height: 27px;
-    font-size: .7rem;
-  }
-
-  .alpha-btn:has(.ar-letter) {
-    width: 30px;
+  .alphabet-label {
     min-width: 30px;
-    height: 37px;
-  }
-
-  .alpha-btn .ar-letter {
-    font-size: .7rem;
-  }
-
-  .alpha-btn .en-letter {
-    font-size: .55rem;
-  }
-
-  .browse-alphabet {
-    gap: 4px;
-  }
-
-  .browse-alphabet .alpha-btn,
-  .browse-alphabet .alpha-btn:has(.ar-letter) {
-    width: 35px;
-    min-width: 35px;
-    height: 39px;
   }
 }
 
-/* =========================================================
-   PRINT
-========================================================= */
+
+/* ================= PRINT ================= */
 
 @media print {
 
