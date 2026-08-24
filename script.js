@@ -1,298 +1,575 @@
 /* =========================================================
    ELP LEGAL DICTIONARY
-   Single-file application
+   3-FILE VERSION
+   Arabic-first interface
    ========================================================= */
 
 
-/* ================= DATA ================= */
+/* =========================================================
+   DICTIONARY DATA
+========================================================= */
 
 const terms = [
+
   {
     id: 1,
     arabic: "الكيان القانوني",
     english: "Legal Status",
-    category: "Commercial Law",
-    categoryAr: "القانون التجاري",
-    shortDefinition: "The legal condition of a natural or legal person that determines their rights and obligations under the law.",
-    fullDefinition: "A natural or legal person recognized by law as an independent unit with legal rights and obligations. Depending on its nature, a legal entity may enter contracts, own rights, assume obligations, conduct legal and financial activities, and participate in transactions or legal proceedings.",
-    keywords: ["طبيعة العمل", "Nature of business", "نوع النشاط", "Type of activity", "الشركة", "Company"],
+    category: "القانون التجاري",
+    categoryEn: "Commercial Law",
+
+    shortDefinition:
+      "الحالة القانونية للشخص الطبيعي أو الاعتباري التي تحدد حقوقه والتزاماته أمام القانون.",
+
+    fullDefinition:
+      "هو الوضع القانوني الذي يعترف به القانون للشخص الطبيعي أو الاعتباري باعتباره وحدة مستقلة لها حقوق والتزامات قانونية، ويختلف نطاق هذه الحقوق والالتزامات بحسب طبيعة الشخص ونوع نشاطه.",
+
+    keywords: [
+      "طبيعة العمل",
+      "Nature of business",
+      "نوع النشاط",
+      "Type of activity",
+      "الشركة",
+      "Company"
+    ],
+
     related: [6, 2, 3],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 2,
     arabic: "رقم البطاقة الضريبية",
     english: "Tax Card No.",
-    category: "Commercial Law",
-    categoryAr: "القانون التجاري",
-    shortDefinition: "A unique identification number issued to tax-registered individuals or companies to track tax obligations and taxable transactions.",
-    fullDefinition: "A unique identification number issued by the tax authority to tax-registered individuals or companies. It is used to identify the taxpayer and track tax obligations and taxable financial transactions.",
-    keywords: ["الرقم الضريبي", "Tax number", "معرف الضرائب", "Tax ID", "المعاملات", "Transactions"],
+    category: "القانون التجاري",
+    categoryEn: "Commercial Law",
+
+    shortDefinition:
+      "رقم تعريف فريد يصدر للمسجلين ضريبيًا لتحديد الممول ومتابعة التزاماته ومعاملاته الضريبية.",
+
+    fullDefinition:
+      "هو رقم تعريف فريد يصدر عن الجهة الضريبية للأفراد أو الشركات المسجلين ضريبيًا، ويستخدم للتعرف على الممول ومتابعة التزاماته والمعاملات المالية الخاضعة للضريبة.",
+
+    keywords: [
+      "الرقم الضريبي",
+      "Tax number",
+      "معرف الضرائب",
+      "Tax ID",
+      "المعاملات",
+      "Transactions"
+    ],
+
     related: [1, 6],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 3,
     arabic: "التفويض",
     english: "Delegation",
-    category: "Administrative Law",
-    categoryAr: "القانون الإداري",
-    shortDefinition: "Assigning another party to perform specific tasks or responsibilities on behalf of the delegating party.",
-    fullDefinition: "The act of assigning another party, such as an employee, agent, or subcontractor, to perform specific tasks, duties, or responsibilities on behalf of the delegating party, while the delegating party retains ultimate responsibility and accountability for the delegated work.",
-    keywords: ["الإنابة", "Authorization", "التكليف", "Assignment"],
+    category: "القانون الإداري",
+    categoryEn: "Administrative Law",
+
+    shortDefinition:
+      "إسناد مهام أو مسؤوليات محددة إلى طرف آخر للقيام بها نيابةً عن الطرف المفوض.",
+
+    fullDefinition:
+      "هو إسناد شخص أو جهة لمهام أو واجبات أو مسؤوليات محددة إلى شخص أو جهة أخرى، مثل الموظف أو الوكيل أو المتعهد، للقيام بها نيابةً عن الطرف المفوض وفقًا للنطاق المحدد للتفويض.",
+
+    keywords: [
+      "الإنابة",
+      "Authorization",
+      "التكليف",
+      "Assignment"
+    ],
+
     related: [7, 1],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 4,
     arabic: "مراقبة جودة",
     english: "Quality Control",
-    category: "Commercial Law",
-    categoryAr: "القانون التجاري",
-    shortDefinition: "The process of checking whether executed work complies with specified standards and requirements.",
-    fullDefinition: "The process of verifying that executed work complies with the specifications and standards outlined in a contract through inspection, testing, and necessary quality-control procedures to ensure quality and identify and address defects or non-compliance.",
-    keywords: ["ضبط الجودة", "Quality assurance", "التأكد من الجودة", "Quality verification"],
+    category: "القانون التجاري",
+    categoryEn: "Commercial Law",
+
+    shortDefinition:
+      "عملية التحقق من توافق الأعمال المنفذة مع المعايير والمتطلبات المحددة.",
+
+    fullDefinition:
+      "هي عملية التحقق من أن الأعمال المنفذة تتوافق مع المواصفات والمعايير المحددة في العقد، من خلال الفحص والاختبار وإجراءات مراقبة الجودة اللازمة لاكتشاف العيوب أو حالات عدم المطابقة ومعالجتها.",
+
+    keywords: [
+      "ضبط الجودة",
+      "Quality assurance",
+      "التأكد من الجودة",
+      "Quality verification"
+    ],
+
     related: [9, 5],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 5,
     arabic: "فسخ العقد",
     english: "Termination",
-    category: "Civil Law",
-    categoryAr: "القانون المدني",
-    shortDefinition: "The legal ending of a contract before its full execution, by agreement or because of a breach.",
-    fullDefinition: "The legal ending of a contract before its full execution, whether by agreement of the parties or as a result of one party failing to meet contractual obligations, according to the contract terms and applicable law.",
-    keywords: ["إنهاء العقد", "Contract Termination", "إنهاء التعاقد", "Termination of Agreement"],
+    category: "القانون المدني",
+    categoryEn: "Civil Law",
+
+    shortDefinition:
+      "إنهاء العقد قانونيًا قبل إتمام تنفيذه، سواء بالاتفاق أو نتيجة إخلال أحد الأطراف بالتزاماته.",
+
+    fullDefinition:
+      "هو إنهاء العقد قبل إتمام تنفيذه، سواء باتفاق الأطراف أو نتيجة إخلال أحد الأطراف بالتزاماته التعاقدية، وذلك وفقًا لشروط العقد والقانون واجب التطبيق.",
+
+    keywords: [
+      "إنهاء العقد",
+      "Contract Termination",
+      "إنهاء التعاقد",
+      "Termination of Agreement"
+    ],
+
     related: [9, 8, 10],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 6,
     arabic: "وكيل تجاري",
     english: "Commercial Agent",
-    category: "Commercial Law",
-    categoryAr: "القانون التجاري",
-    shortDefinition: "An agent who represents a principal in commercial activities and sales or purchases.",
-    fullDefinition: "A commercial agent is a party who represents a principal in commercial transactions, including activities connected with sales and purchases, within the agreed scope of agency.",
-    keywords: ["وكالة تجارية", "Commercial Agency Contract", "سمسار", "Broker"],
+    category: "القانون التجاري",
+    categoryEn: "Commercial Law",
+
+    shortDefinition:
+      "شخص يمثل الأصيل في المعاملات والأنشطة التجارية، بما في ذلك عمليات البيع والشراء.",
+
+    fullDefinition:
+      "هو شخص أو جهة تمثل الأصيل في المعاملات التجارية، بما في ذلك الأنشطة المرتبطة بالبيع والشراء، وذلك في حدود نطاق الوكالة المتفق عليه.",
+
+    keywords: [
+      "وكالة تجارية",
+      "Commercial Agency Contract",
+      "سمسار",
+      "Broker"
+    ],
+
     related: [1, 7, 8],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 7,
     arabic: "واجب الإخطار",
     english: "Duty to Notify",
-    category: "Commercial Law",
-    categoryAr: "القانون التجاري",
-    shortDefinition: "The duty of an agent to inform the principal of important information related to the agency.",
-    fullDefinition: "An obligation requiring an agent to communicate important information relevant to the agency relationship to the principal, supporting transparency and informed decision-making.",
-    keywords: ["الشفافية", "Transparency", "الإفصاح", "Disclosure"],
+    category: "القانون التجاري",
+    categoryEn: "Commercial Law",
+
+    shortDefinition:
+      "التزام الوكيل بإبلاغ الأصيل بالمعلومات المهمة المتعلقة بعلاقة الوكالة.",
+
+    fullDefinition:
+      "هو التزام يفرض على الوكيل إبلاغ الأصيل بالمعلومات المهمة والمرتبطة بعلاقة الوكالة، بما يساعد على الشفافية واتخاذ القرارات المناسبة.",
+
+    keywords: [
+      "الشفافية",
+      "Transparency",
+      "الإفصاح",
+      "Disclosure"
+    ],
+
     related: [6, 8],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 8,
     arabic: "السرية",
     english: "Confidentiality",
-    category: "Civil Law",
-    categoryAr: "القانون المدني",
-    shortDefinition: "An obligation not to disclose confidential information belonging to the principal or another protected party.",
-    fullDefinition: "An obligation to protect confidential information and not disclose it to unauthorized parties, particularly where the information is received through a contractual or fiduciary relationship.",
-    keywords: ["واجب الولاء", "Duty of loyalty", "علاقة محل الثقة", "Fiduciary Relationship"],
+    category: "القانون المدني",
+    categoryEn: "Civil Law",
+
+    shortDefinition:
+      "التزام بعدم إفشاء المعلومات السرية الخاصة بالطرف الآخر أو الجهة المحمية.",
+
+    fullDefinition:
+      "هو الالتزام بحماية المعلومات السرية وعدم إفشائها إلى أطراف غير مصرح لها، خاصة عندما يتم الحصول على هذه المعلومات من خلال علاقة تعاقدية أو علاقة تقوم على الثقة.",
+
+    keywords: [
+      "واجب الولاء",
+      "Duty of loyalty",
+      "علاقة محل الثقة",
+      "Fiduciary Relationship"
+    ],
+
     related: [6, 7, 5],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 9,
     arabic: "مدة العقد",
     english: "Contract Term",
-    category: "Civil Law",
-    categoryAr: "القانون المدني",
-    shortDefinition: "The period during which a contract remains valid.",
-    fullDefinition: "The period of time during which the contract remains in force and its agreed rights and obligations continue to apply, subject to its terms and applicable law.",
-    keywords: ["تجديد العقد", "Contract Renewal", "انتهاء العقد", "Contract Expiration", "مدة الالتزام", "Obligation Period"],
+    category: "القانون المدني",
+    categoryEn: "Civil Law",
+
+    shortDefinition:
+      "الفترة الزمنية التي يظل خلالها العقد ساريًا وتستمر خلالها حقوق والتزامات الأطراف.",
+
+    fullDefinition:
+      "هي الفترة الزمنية التي يظل العقد خلالها نافذًا، وتستمر خلالها الحقوق والالتزامات المتفق عليها، مع مراعاة شروط العقد والقانون واجب التطبيق.",
+
+    keywords: [
+      "تجديد العقد",
+      "Contract Renewal",
+      "انتهاء العقد",
+      "Contract Expiration",
+      "مدة الالتزام",
+      "Obligation Period"
+    ],
+
     related: [5, 6],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   },
+
 
   {
     id: 10,
     arabic: "الاختصاص القضائي",
     english: "Competent Jurisdiction",
-    category: "Administrative Law",
-    categoryAr: "القانون الإداري",
-    shortDefinition: "The court or judicial body competent to hear disputes arising from a contract.",
-    fullDefinition: "The court or judicial body that has legal competence to hear and decide disputes arising from a contract or legal relationship, according to the applicable rules of jurisdiction.",
-    keywords: ["النزاع القضائي", "Legal Dispute", "مكان التقاضي", "Litigation Venue", "التحكيم الدولي", "International arbitration"],
+    category: "القانون الإداري",
+    categoryEn: "Administrative Law",
+
+    shortDefinition:
+      "المحكمة أو الجهة القضائية المختصة بنظر والفصل في النزاعات وفقًا لقواعد الاختصاص.",
+
+    fullDefinition:
+      "هي المحكمة أو الجهة القضائية التي تتمتع بالاختصاص القانوني لنظر والفصل في النزاعات الناشئة عن عقد أو علاقة قانونية وفقًا للقواعد القانونية المنظمة للاختصاص.",
+
+    keywords: [
+      "النزاع القضائي",
+      "Legal Dispute",
+      "مكان التقاضي",
+      "Litigation Venue",
+      "التحكيم الدولي",
+      "International Arbitration"
+    ],
+
     related: [5, 9],
-    source: "Public-source demo content from the project workbook",
-    lastUpdated: "2026-08-17"
+
+    source:
+      "Public-source demo content from the project workbook",
+
+    lastUpdated:
+      "2026-08-17"
   }
+
 ];
 
 
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
 const categories = [
+
   {
-    name: "Criminal Law",
-    arabic: "القانون الجنائي",
+    name: "القانون الجنائي",
+    english: "Criminal Law",
     icon: "⚖",
     description: "الجرائم والسرقة والاحتيال والمصطلحات المرتبطة بها."
   },
+
   {
-    name: "Civil Law",
-    arabic: "القانون المدني",
+    name: "القانون المدني",
+    english: "Civil Law",
     icon: "▤",
-    description: "العقود والتعويض والمسؤولية."
+    description: "العقود والتعويض والمسؤولية والالتزامات."
   },
+
   {
-    name: "Family Law",
-    arabic: "قانون الأسرة",
+    name: "قانون الأسرة",
+    english: "Family Law",
     icon: "♧",
-    description: "الزواج والطلاق والحضانة وشؤون الأسرة."
+    description: "الزواج والطلاق والحضانة والمسائل الأسرية."
   },
+
   {
-    name: "Commercial Law",
-    arabic: "القانون التجاري",
+    name: "القانون التجاري",
+    english: "Commercial Law",
     icon: "▣",
     description: "الشركات والتجارة والعلاقات التجارية."
   },
+
   {
-    name: "Labor Law",
-    arabic: "قانون العمل",
+    name: "قانون العمل",
+    english: "Labor Law",
     icon: "◈",
-    description: "العمل والرواتب وعلاقات العمل."
+    description: "العمل والأجور وعلاقات العمل."
   },
+
   {
-    name: "Administrative Law",
-    arabic: "القانون الإداري",
+    name: "القانون الإداري",
+    english: "Administrative Law",
     icon: "⌂",
-    description: "التنظيم والسلطة والتراخيص."
+    description: "التنظيم والسلطات والتراخيص."
   },
+
   {
-    name: "Constitutional Law",
-    arabic: "القانون الدستوري",
+    name: "القانون الدستوري",
+    english: "Constitutional Law",
     icon: "◇",
     description: "الدستور والحقوق والحريات."
   },
+
   {
-    name: "General Legal Terms",
-    arabic: "مصطلحات قانونية عامة",
+    name: "مصطلحات قانونية عامة",
+    english: "General Legal Terms",
     icon: "§",
     description: "مصطلحات قانونية شائعة في مختلف المجالات."
   }
+
 ];
 
 
-/* ================= STATE ================= */
+/* =========================================================
+   STATE
+========================================================= */
 
 const app = document.getElementById("app");
 const savedCount = document.getElementById("savedCount");
 const toast = document.getElementById("toast");
 
 const state = {
-  saved: readStorage("elpSaved", []),
-  recent: readStorage("elpRecent", []),
-  route: "home",
-  query: "",
-  category: "All Categories",
-  letter: "All",
-  letterLanguage: "en"
+
+  saved:
+    readStorage("elpSaved", []),
+
+  recent:
+    readStorage("elpRecent", []),
+
+  route:
+    "home",
+
+  query:
+    "",
+
+  category:
+    "الكل",
+
+  englishLetter:
+    "الكل",
+
+  arabicLetter:
+    "الكل",
+
+  speakingId:
+    null
+
 };
 
 
-/* ================= STORAGE ================= */
+/* =========================================================
+   STORAGE
+========================================================= */
 
 function readStorage(key, fallback) {
+
   try {
-    const value = JSON.parse(localStorage.getItem(key));
+
+    const value =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
     return value ?? fallback;
+
   } catch {
+
     return fallback;
+
   }
+
 }
+
 
 function writeStorage(key, value) {
+
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+
+    localStorage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
   } catch {}
+
 }
 
 
-/* ================= HELPERS ================= */
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  }[c]));
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g, c => ({
+
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+
+    }[c]));
+
 }
+
 
 function findTerm(id) {
-  return terms.find(t => t.id === Number(id));
+
+  return terms.find(
+    t => t.id === Number(id)
+  );
+
 }
+
 
 function isSaved(id) {
-  return state.saved.includes(Number(id));
+
+  return state.saved.includes(
+    Number(id)
+  );
+
 }
 
-function normalize(value) {
-  return String(value || "")
-    .toLocaleLowerCase("ar-EG")
-    .trim();
-}
 
 function showToast(message) {
+
   toast.textContent = message;
+
   toast.classList.add("show");
 
-  clearTimeout(showToast.timer);
+  clearTimeout(
+    showToast.timer
+  );
 
-  showToast.timer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2200);
+  showToast.timer =
+    setTimeout(
+      () =>
+        toast.classList.remove("show"),
+      2200
+    );
+
 }
+
 
 function updateSavedCount() {
-  savedCount.textContent = state.saved.length;
+
+  savedCount.textContent =
+    state.saved.length;
+
 }
+
 
 function saveState() {
-  writeStorage("elpSaved", state.saved);
-  writeStorage("elpRecent", state.recent);
+
+  writeStorage(
+    "elpSaved",
+    state.saved
+  );
+
+  writeStorage(
+    "elpRecent",
+    state.recent
+  );
+
   updateSavedCount();
+
 }
 
+
+/* =========================================================
+   RECENT
+========================================================= */
+
 function addRecent(id) {
+
   id = Number(id);
 
   state.recent = [
+
     id,
-    ...state.recent.filter(x => x !== id)
+
+    ...state.recent.filter(
+      x => x !== id
+    )
+
   ].slice(0, 6);
 
   saveState();
+
 }
+
+
+/* =========================================================
+   SAVE
+========================================================= */
 
 function toggleSaved(id) {
 
@@ -300,162 +577,188 @@ function toggleSaved(id) {
 
   if (isSaved(id)) {
 
-    state.saved = state.saved.filter(x => x !== id);
+    state.saved =
+      state.saved.filter(
+        x => x !== id
+      );
 
-    showToast("تم حذف المصطلح من المحفوظات.");
+    showToast(
+      "تم حذف المصطلح من المحفوظات."
+    );
 
   } else {
 
     state.saved.unshift(id);
 
-    showToast("تم حفظ المصطلح بنجاح.");
+    showToast(
+      "تم حفظ المصطلح بنجاح."
+    );
 
   }
 
   saveState();
+
   render();
+
 }
 
 
-/* ================= SEARCH ================= */
+/* =========================================================
+   ROUTING
+========================================================= */
+
+function setRoute(route) {
+
+  state.route =
+    route;
+
+  state.query =
+    "";
+
+  state.category =
+    "الكل";
+
+  state.englishLetter =
+    "الكل";
+
+  state.arabicLetter =
+    "الكل";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  render();
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function normalize(value) {
+
+  return String(value || "")
+    .toLocaleLowerCase("ar-EG")
+    .trim();
+
+}
+
 
 function matchesQuery(term, q) {
 
-  if (!q) return true;
+  if (!q)
+    return true;
 
   const haystack = [
+
     term.arabic,
+
     term.english,
+
     term.category,
-    term.categoryAr,
+
+    term.categoryEn,
+
     term.shortDefinition,
+
     term.fullDefinition,
+
     ...(term.keywords || [])
+
   ].join(" ");
 
-  return normalize(haystack).includes(normalize(q));
+  return normalize(haystack)
+    .includes(
+      normalize(q)
+    );
+
 }
 
 
-function matchesEnglishLetter(term, letter) {
+/* =========================================================
+   LETTER FILTER
+========================================================= */
 
-  if (letter === "All") return true;
+function matchesEnglishLetter(term) {
 
-  return normalize(term.english).startsWith(
-    normalize(letter)
+  if (
+    state.englishLetter === "الكل"
+  )
+    return true;
+
+  return normalize(
+    term.english
+  ).startsWith(
+    normalize(
+      state.englishLetter
+    )
   );
+
 }
 
 
-/* Arabic letters */
+function matchesArabicLetter(term) {
 
-const arabicLetters = [
-  "ا","ب","ت","ث","ج","ح","خ",
-  "د","ذ","ر","ز","س","ش","ص",
-  "ض","ط","ظ","ع","غ","ف","ق",
-  "ك","ل","م","ن","ه","و","ي"
-];
+  if (
+    state.arabicLetter === "الكل"
+  )
+    return true;
 
+  return term.arabic
+    .trim()
+    .startsWith(
+      state.arabicLetter
+    );
 
-function matchesArabicLetter(term, letter) {
-
-  if (letter === "All") return true;
-
-  return term.arabic.trim().startsWith(letter);
 }
 
 
 function filteredTerms() {
 
-  return terms.filter(term => {
+  return terms.filter(term =>
 
-    const queryMatch = matchesQuery(term, state.query);
+    matchesQuery(
+      term,
+      state.query
+    )
 
-    const categoryMatch =
-      state.category === "All Categories" ||
-      term.category === state.category;
+    &&
 
-    let letterMatch = true;
+    (
+      state.category === "الكل"
+      ||
+      term.category === state.category
+    )
 
-    if (state.letterLanguage === "en") {
-      letterMatch = matchesEnglishLetter(term, state.letter);
-    }
+    &&
 
-    if (state.letterLanguage === "ar") {
-      letterMatch = matchesArabicLetter(term, state.letter);
-    }
+    matchesEnglishLetter(term)
 
-    return queryMatch && categoryMatch && letterMatch;
-  });
+    &&
+
+    matchesArabicLetter(term)
+
+  );
+
 }
 
 
-/* ================= ALPHABET ================= */
-
-function alphabetButtons(active = "All", language = "en", prefix = "") {
-
-  const letters =
-    language === "ar"
-      ? arabicLetters
-      : "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
-  return `
-    <div class="${prefix}alphabet-row ${language === "en" ? "english-row" : ""}">
-
-      <span class="alphabet-label">
-        ${language === "ar" ? "أ–ي" : "A–Z"}
-      </span>
-
-      <button
-        class="alpha-btn ${active === "All" ? "active" : ""}"
-        data-action="letter"
-        data-letter="All"
-        data-letter-language="${language}">
-        الكل
-      </button>
-
-      ${letters.map(letter => `
-        <button
-          class="alpha-btn ${active === letter ? "active" : ""}"
-          data-action="letter"
-          data-letter="${letter}"
-          data-letter-language="${language}">
-          ${letter}
-        </button>
-      `).join("")}
-
-    </div>
-  `;
-}
-
-
-function homeAlphabet() {
-
-  return `
-    <div class="alphabet-block">
-
-      ${alphabetButtons(
-        state.letterLanguage === "ar" ? state.letter : "All",
-        "ar"
-      )}
-
-      ${alphabetButtons(
-        state.letterLanguage === "en" ? state.letter : "All",
-        "en"
-      )}
-
-    </div>
-  `;
-}
-
-
-/* ================= TERM CARD ================= */
+/* =========================================================
+   TERM CARD
+   Arabic + English ONLY
+   NO DEFINITION ON CARD
+========================================================= */
 
 function termCard(term) {
 
-  const saved = isSaved(term.id);
+  const saved =
+    isSaved(term.id);
 
   return `
+
     <article class="term-card">
 
       <div class="term-top">
@@ -476,43 +779,161 @@ function termCard(term) {
           class="btn icon ${saved ? "saved" : ""}"
           title="${saved ? "إزالة من المحفوظات" : "حفظ المصطلح"}"
           data-action="save"
-          data-id="${term.id}">
+          data-id="${term.id}"
+        >
           ${saved ? "★" : "☆"}
         </button>
 
       </div>
 
-      <span class="badge">
-        ${escapeHtml(term.categoryAr)}
-        ·
-        ${escapeHtml(term.category)}
-      </span>
+
+      <div class="card-category">
+
+        <span>
+          ${escapeHtml(term.category)}
+        </span>
+
+        <small>
+          ${escapeHtml(term.categoryEn)}
+        </small>
+
+      </div>
+
 
       <div class="card-actions">
 
         <button
           class="btn primary"
           data-action="open"
-          data-id="${term.id}">
+          data-id="${term.id}"
+        >
           عرض المصطلح
         </button>
 
         <button
-          class="btn"
+          class="btn speak-button"
           data-action="speak"
           data-id="${term.id}"
-          title="نطق المصطلح">
+          title="نطق المصطلح"
+        >
           🔊
         </button>
 
       </div>
 
     </article>
+
   `;
+
 }
 
 
-/* ================= HOME ================= */
+/* =========================================================
+   ENGLISH ALPHABET
+========================================================= */
+
+function englishAlphabet(active = "الكل") {
+
+  const letters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      .split("");
+
+  return `
+
+    <div class="alphabet">
+
+      <button
+        class="alpha-btn ${
+          active === "الكل"
+            ? "active"
+            : ""
+        }"
+        data-action="englishLetter"
+        data-letter="الكل"
+      >
+        الكل
+      </button>
+
+      ${letters.map(letter => `
+
+        <button
+          class="alpha-btn ${
+            active === letter
+              ? "active"
+              : ""
+          }"
+          data-action="englishLetter"
+          data-letter="${letter}"
+        >
+          ${letter}
+        </button>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ARABIC ALPHABET
+========================================================= */
+
+function arabicAlphabet(active = "الكل") {
+
+  const letters = [
+
+    "ا","ب","ت","ث","ج","ح","خ",
+    "د","ذ","ر","ز","س","ش","ص",
+    "ض","ط","ظ","ع","غ","ف","ق",
+    "ك","ل","م","ن","ه","و","ي"
+
+  ];
+
+  return `
+
+    <div class="arabic-alphabet">
+
+      <button
+        class="arabic-alpha-btn ${
+          active === "الكل"
+            ? "active"
+            : ""
+        }"
+        data-action="arabicLetter"
+        data-letter="الكل"
+      >
+        الكل
+      </button>
+
+      ${letters.map(letter => `
+
+        <button
+          class="arabic-alpha-btn ${
+            active === letter
+              ? "active"
+              : ""
+          }"
+          data-action="arabicLetter"
+          data-letter="${letter}"
+        >
+          ${letter}
+        </button>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
 
 function homeView() {
 
@@ -522,7 +943,10 @@ function homeView() {
       .filter(Boolean)
       .slice(0, 3);
 
-  const featured = terms.slice(0, 6);
+
+  const featured =
+    terms.slice(0, 6);
+
 
   return `
 
@@ -531,26 +955,32 @@ function homeView() {
       <div class="container hero-content">
 
         <div class="eyebrow">
-          البوابة القانونية المصرية • خدمة معلومات قانونية
+          البوابة القانونية المصرية • خدمة المعرفة
         </div>
 
         <h1>
-          القاموس القانوني المصري
+          القاموس القانوني
         </h1>
 
         <p>
-          ابحث عن المصطلحات القانونية، تعرف على معانيها،
-          واستكشف المصطلحات حسب المجال القانوني.
+          ابحث عن المصطلحات القانونية،
+          تعرف على معانيها،
+          واستكشف المفاهيم القانونية حسب التصنيف.
         </p>
 
-        <form class="search-box" id="homeSearch">
+
+        <form
+          class="search-box"
+          id="homeSearch"
+        >
 
           <input
             id="homeSearchInput"
             type="search"
             autocomplete="off"
             placeholder="ابحث عن مصطلح قانوني..."
-            aria-label="البحث في القاموس القانوني">
+            aria-label="البحث في القاموس القانوني"
+          >
 
           <button type="submit">
             بحث
@@ -565,13 +995,28 @@ function homeView() {
 
     <div class="quick-strip">
 
-      <div class="container quick-strip-inner">
+      <div class="container">
 
-        <div class="quick-title">
-          تصفح حسب الحروف
+        <div class="quick-strip-inner">
+
+          <div class="quick-title">
+            تصفح بالإنجليزية
+          </div>
+
+          ${englishAlphabet()}
+
         </div>
 
-        ${homeAlphabet()}
+
+        <div class="arabic-browse-row">
+
+          <div class="quick-title">
+            تصفح بالعربية
+          </div>
+
+          ${arabicAlphabet()}
+
+        </div>
 
       </div>
 
@@ -585,16 +1030,21 @@ function homeView() {
         <div class="section-head">
 
           <div>
-            <h2>التصنيفات القانونية</h2>
+
+            <h2>
+              التصنيفات القانونية
+            </h2>
 
             <p>
               تصفح القاموس حسب المجال القانوني.
             </p>
+
           </div>
 
           <button
             class="text-link"
-            data-route="browse">
+            data-route="browse"
+          >
             عرض الكل ←
           </button>
 
@@ -608,18 +1058,19 @@ function homeView() {
             <button
               class="category-card"
               data-action="category"
-              data-category="${escapeHtml(category.name)}">
+              data-category="${escapeHtml(category.name)}"
+            >
 
               <div class="category-icon">
                 ${category.icon}
               </div>
 
               <strong>
-                ${escapeHtml(category.arabic)}
+                ${escapeHtml(category.name)}
               </strong>
 
-              <span>
-                ${escapeHtml(category.name)}
+              <span class="category-en">
+                ${escapeHtml(category.english)}
               </span>
 
               <span>
@@ -637,31 +1088,42 @@ function homeView() {
     </section>
 
 
-    <section class="section" style="padding-top:0">
+    <section
+      class="section"
+      style="padding-top:0"
+    >
 
       <div class="container">
 
         <div class="section-head">
 
           <div>
-            <h2>المصطلحات المضافة حديثًا</h2>
+
+            <h2>
+              المصطلحات المضافة حديثًا
+            </h2>
 
             <p>
-              مجموعة من المصطلحات التجريبية في النموذج الأولي.
+              مجموعة من المصطلحات التجريبية في القاموس.
             </p>
+
           </div>
 
           <button
             class="text-link"
-            data-route="browse">
+            data-route="browse"
+          >
             تصفح الكل ←
           </button>
 
         </div>
 
+
         <div class="term-grid">
 
-          ${featured.map(termCard).join("")}
+          ${featured
+            .map(termCard)
+            .join("")}
 
         </div>
 
@@ -672,57 +1134,71 @@ function homeView() {
 
     ${
       recentTerms.length
-      ? `
 
-      <section class="section" style="padding-top:0">
+        ? `
 
-        <div class="container">
+          <section
+            class="section"
+            style="padding-top:0"
+          >
 
-          <div class="section-head">
+            <div class="container">
 
-            <div>
+              <div class="section-head">
 
-              <h2>
-                شوهدت مؤخرًا
-              </h2>
+                <div>
 
-              <p>
-                المصطلحات التي قمت بفتحها مؤخرًا.
-              </p>
+                  <h2>
+                    شوهد مؤخرًا
+                  </h2>
+
+                  <p>
+                    وصول سريع إلى المصطلحات التي فتحتها.
+                  </p>
+
+                </div>
+
+                <button
+                  class="text-link"
+                  data-route="recent"
+                >
+                  عرض السجل ←
+                </button>
+
+              </div>
+
+
+              <div class="term-grid">
+
+                ${recentTerms
+                  .map(termCard)
+                  .join("")}
+
+              </div>
 
             </div>
 
-            <button
-              class="text-link"
-              data-route="recent">
-              عرض السجل ←
-            </button>
+          </section>
 
-          </div>
+        `
 
-          <div class="term-grid">
-
-            ${recentTerms.map(termCard).join("")}
-
-          </div>
-
-        </div>
-
-      </section>
-
-      `
-      : ""
+        : ""
     }
 
   `;
+
 }
 
 
-/* ================= RESULTS ================= */
+/* =========================================================
+   RESULTS
+========================================================= */
 
 function resultsView() {
 
-  const results = filteredTerms();
+  const results =
+    filteredTerms();
+
 
   return `
 
@@ -735,11 +1211,17 @@ function resultsView() {
         </h1>
 
         <p>
+
           ${
             state.query
-              ? `نتائج البحث عن "${escapeHtml(state.query)}"`
+
+              ? `نتائج البحث عن:
+                 “${escapeHtml(state.query)}”`
+
               : "تصفح المصطلحات القانونية."
+
           }
+
         </p>
 
       </div>
@@ -751,23 +1233,26 @@ function resultsView() {
 
       <div class="container results-layout">
 
+
         <aside class="filters">
 
           <h3>
             تصفية النتائج
           </h3>
 
+
           <div class="filter-group">
 
             <label>
-              كلمة البحث
+              البحث
             </label>
 
             <input
               id="resultSearch"
               type="search"
               value="${escapeHtml(state.query)}"
-              placeholder="ابحث...">
+              placeholder="ابحث..."
+            >
 
           </div>
 
@@ -780,20 +1265,18 @@ function resultsView() {
 
             <select id="categoryFilter">
 
-              <option value="All Categories">
-                كل التصنيفات
-              </option>
+              <option>الكل</option>
 
               ${categories.map(c => `
 
                 <option
-                  value="${escapeHtml(c.name)}"
-                  ${state.category === c.name ? "selected" : ""}>
-
-                  ${escapeHtml(c.arabic)}
-                  ·
+                  ${
+                    state.category === c.name
+                      ? "selected"
+                      : ""
+                  }
+                >
                   ${escapeHtml(c.name)}
-
                 </option>
 
               `).join("")}
@@ -805,7 +1288,8 @@ function resultsView() {
 
           <button
             class="btn"
-            id="resetFilters">
+            id="resetFilters"
+          >
             إعادة ضبط الفلاتر
           </button>
 
@@ -822,14 +1306,16 @@ function resultsView() {
                 ${results.length}
               </strong>
 
-              مصطلح
+              مصطلح متاح
 
             </span>
 
+
             <button
               class="text-link"
-              data-route="browse">
-              تصفح أ–ي / A–Z →
+              data-route="browse"
+            >
+              تصفح أ-ي ←
             </button>
 
           </div>
@@ -838,31 +1324,41 @@ function resultsView() {
           ${
             results.length
 
-            ? `
-              <div class="term-grid">
-                ${results.map(termCard).join("")}
-              </div>
-            `
+              ? `
 
-            : `
-              <div class="no-results">
+                <div class="term-grid">
 
-                <h3>
-                  لم يتم العثور على نتائج مطابقة
-                </h3>
+                  ${results
+                    .map(termCard)
+                    .join("")}
 
-                <p>
-                  جربي كلمة أخرى أو البحث بالعربي أو الإنجليزي.
-                </p>
+                </div>
 
-                <button
-                  class="btn primary"
-                  id="noResultReset">
-                  إعادة البحث
-                </button>
+              `
 
-              </div>
-            `
+              : `
+
+                <div class="no-results">
+
+                  <h3>
+                    لم يتم العثور على نتائج
+                  </h3>
+
+                  <p>
+                    جربي كلمة أخرى أو ابحثي بالإنجليزية
+                    أو استخدمي أحد التصنيفات.
+                  </p>
+
+                  <button
+                    class="btn primary"
+                    id="noResultReset"
+                  >
+                    إعادة البحث
+                  </button>
+
+                </div>
+
+              `
           }
 
         </div>
@@ -872,14 +1368,19 @@ function resultsView() {
     </section>
 
   `;
+
 }
 
 
-/* ================= BROWSE ================= */
+/* =========================================================
+   BROWSE
+========================================================= */
 
 function browseView() {
 
-  const results = filteredTerms();
+  const results =
+    filteredTerms();
+
 
   return `
 
@@ -888,27 +1389,31 @@ function browseView() {
       <div class="container">
 
         <h1>
-          تصفح المصطلحات القانونية
+          تصفح المصطلحات
         </h1>
 
         <p>
-          اختاري حرفًا عربيًا أو إنجليزيًا لتصفح المصطلحات.
+          اختر حرفًا بالعربية أو الإنجليزية
+          لاستكشاف المصطلحات.
         </p>
 
 
-        <div class="alphabet-block browse-alphabet">
+        <h3 class="browse-label">
+          الحروف الإنجليزية A-Z
+        </h3>
 
-          ${alphabetButtons(
-            state.letterLanguage === "ar" ? state.letter : "All",
-            "ar"
-          )}
+        ${englishAlphabet(
+          state.englishLetter
+        )}
 
-          ${alphabetButtons(
-            state.letterLanguage === "en" ? state.letter : "All",
-            "en"
-          )}
 
-        </div>
+        <h3 class="browse-label">
+          الحروف العربية أ-ي
+        </h3>
+
+        ${arabicAlphabet(
+          state.arabicLetter
+        )}
 
       </div>
 
@@ -918,6 +1423,7 @@ function browseView() {
     <section class="section">
 
       <div class="container">
+
 
         <div class="results-toolbar">
 
@@ -934,24 +1440,21 @@ function browseView() {
 
           <select
             id="browseCategory"
-            class="btn">
+            class="btn"
+          >
 
-            <option value="All Categories">
-              كل التصنيفات
-            </option>
+            <option>الكل</option>
 
             ${categories.map(c => `
 
               <option
-                value="${escapeHtml(c.name)}"
-                ${state.category === c.name ? "selected" : ""}>
-
-                ${escapeHtml(c.arabic)}
-
-                ·
-
+                ${
+                  state.category === c.name
+                    ? "selected"
+                    : ""
+                }
+              >
                 ${escapeHtml(c.name)}
-
               </option>
 
             `).join("")}
@@ -964,25 +1467,27 @@ function browseView() {
         ${
           results.length
 
-          ? `
-            <div class="term-grid">
-              ${results.map(termCard).join("")}
-            </div>
-          `
+            ? `
 
-          : `
-            <div class="empty-state">
+              <div class="term-grid">
 
-              <h3>
-                لا توجد مصطلحات لهذا الاختيار
-              </h3>
+                ${results
+                  .map(termCard)
+                  .join("")}
 
-              <p>
-                جربي حرفًا آخر أو تصنيفًا مختلفًا.
-              </p>
+              </div>
 
-            </div>
-          `
+            `
+
+            : `
+
+              <div class="empty-state">
+
+                لا توجد مصطلحات لهذا الحرف حاليًا.
+
+              </div>
+
+            `
         }
 
       </div>
@@ -990,10 +1495,13 @@ function browseView() {
     </section>
 
   `;
+
 }
 
 
-/* ================= BOOKMARKS ================= */
+/* =========================================================
+   BOOKMARKS
+========================================================= */
 
 function bookmarksView() {
 
@@ -1001,6 +1509,7 @@ function bookmarksView() {
     state.saved
       .map(findTerm)
       .filter(Boolean);
+
 
   return `
 
@@ -1013,7 +1522,7 @@ function bookmarksView() {
         </h1>
 
         <p>
-          المصطلحات التي قمتِ بحفظها للرجوع إليها لاحقًا.
+          المصطلحات التي قمتِ بحفظها على هذا المتصفح.
         </p>
 
       </div>
@@ -1028,31 +1537,40 @@ function bookmarksView() {
         ${
           savedTerms.length
 
-          ? `
-            <div class="term-grid">
-              ${savedTerms.map(termCard).join("")}
-            </div>
-          `
+            ? `
 
-          : `
-            <div class="empty-state">
+              <div class="term-grid">
 
-              <h3>
-                لا توجد مصطلحات محفوظة
-              </h3>
+                ${savedTerms
+                  .map(termCard)
+                  .join("")}
 
-              <p>
-                اضغطي على ☆ بجانب أي مصطلح لحفظه.
-              </p>
+              </div>
 
-              <button
-                class="btn primary"
-                data-route="browse">
-                تصفح المصطلحات
-              </button>
+            `
 
-            </div>
-          `
+            : `
+
+              <div class="empty-state">
+
+                <h3>
+                  لا توجد مصطلحات محفوظة
+                </h3>
+
+                <p>
+                  اضغطي ☆ بجانب أي مصطلح لإضافته للمحفوظات.
+                </p>
+
+                <button
+                  class="btn primary"
+                  data-route="browse"
+                >
+                  تصفح المصطلحات
+                </button>
+
+              </div>
+
+            `
         }
 
       </div>
@@ -1060,10 +1578,13 @@ function bookmarksView() {
     </section>
 
   `;
+
 }
 
 
-/* ================= RECENT ================= */
+/* =========================================================
+   RECENT
+========================================================= */
 
 function recentView() {
 
@@ -1072,6 +1593,7 @@ function recentView() {
       .map(findTerm)
       .filter(Boolean);
 
+
   return `
 
     <section class="page-head">
@@ -1079,11 +1601,11 @@ function recentView() {
       <div class="container">
 
         <h1>
-          شوهدت مؤخرًا
+          شوهد مؤخرًا
         </h1>
 
         <p>
-          أحدث المصطلحات التي قمتِ بفتحها.
+          آخر المصطلحات التي قمتِ بفتحها.
         </p>
 
       </div>
@@ -1098,25 +1620,33 @@ function recentView() {
         ${
           recentTerms.length
 
-          ? `
-            <div class="term-grid">
-              ${recentTerms.map(termCard).join("")}
-            </div>
-          `
+            ? `
 
-          : `
-            <div class="empty-state">
+              <div class="term-grid">
 
-              <h3>
-                لا توجد مصطلحات شوهدت مؤخرًا
-              </h3>
+                ${recentTerms
+                  .map(termCard)
+                  .join("")}
 
-              <p>
-                افتحي أي مصطلح وسيظهر هنا.
-              </p>
+              </div>
 
-            </div>
-          `
+            `
+
+            : `
+
+              <div class="empty-state">
+
+                <h3>
+                  لا توجد مصطلحات تم عرضها مؤخرًا
+                </h3>
+
+                <p>
+                  افتحي أي مصطلح وسيظهر هنا.
+                </p>
+
+              </div>
+
+            `
         }
 
       </div>
@@ -1124,25 +1654,32 @@ function recentView() {
     </section>
 
   `;
+
 }
 
 
-/* ================= DETAIL ================= */
+/* =========================================================
+   DETAIL PAGE
+========================================================= */
 
 function detailView(id) {
 
-  const term = findTerm(id);
+  const term =
+    findTerm(id);
 
-  if (!term) {
+
+  if (!term)
     return homeView();
-  }
+
 
   addRecent(term.id);
+
 
   const related =
     term.related
       .map(findTerm)
       .filter(Boolean);
+
 
   return `
 
@@ -1150,11 +1687,13 @@ function detailView(id) {
 
       <div class="container">
 
+
         <div class="breadcrumb">
 
           <button
             class="text-link"
-            data-route="home">
+            data-route="home"
+          >
             الرئيسية
           </button>
 
@@ -1162,7 +1701,8 @@ function detailView(id) {
 
           <button
             class="text-link"
-            data-route="browse">
+            data-route="browse"
+          >
             القاموس القانوني
           </button>
 
@@ -1174,6 +1714,7 @@ function detailView(id) {
 
 
         <article class="detail-card">
+
 
           <header class="detail-header">
 
@@ -1189,13 +1730,22 @@ function detailView(id) {
             <div class="detail-meta">
 
               <span class="badge">
-                ${escapeHtml(term.categoryAr)}
-                ·
+
                 ${escapeHtml(term.category)}
+
               </span>
 
               <span class="badge">
-                آخر تحديث ${escapeHtml(term.lastUpdated)}
+
+                ${escapeHtml(term.categoryEn)}
+
+              </span>
+
+              <span class="badge">
+
+                آخر تحديث:
+                ${escapeHtml(term.lastUpdated)}
+
               </span>
 
             </div>
@@ -1204,34 +1754,39 @@ function detailView(id) {
             <div class="detail-actions">
 
               <button
-                class="btn"
+                class="btn speak-detail"
                 data-action="speak"
-                data-id="${term.id}">
+                data-id="${term.id}"
+              >
                 🔊 نطق المصطلح
               </button>
+
 
               <button
                 class="btn"
                 data-action="save"
-                data-id="${term.id}">
-
+                data-id="${term.id}"
+              >
                 ${
                   isSaved(term.id)
                     ? "★ محفوظ"
                     : "☆ حفظ المصطلح"
                 }
-
               </button>
+
 
               <button
                 class="btn"
-                onclick="window.print()">
+                onclick="window.print()"
+              >
                 🖨 طباعة
               </button>
 
+
               <button
                 class="btn"
-                data-route="browse">
+                data-route="browse"
+              >
                 ← العودة للقاموس
               </button>
 
@@ -1242,18 +1797,21 @@ function detailView(id) {
 
           <div class="detail-body">
 
+
             <div class="definition-tabs">
 
               <button
                 class="tab-btn active"
-                data-tab="simple">
+                data-tab="simple"
+              >
                 التعريف المختصر
               </button>
 
               <button
                 class="tab-btn"
-                data-tab="full">
-                التعريف الكامل
+                data-tab="full"
+              >
+                التعريف الموسع
               </button>
 
             </div>
@@ -1261,10 +1819,11 @@ function detailView(id) {
 
             <div
               id="definitionContent"
-              class="definition-text">
-
-              ${escapeHtml(term.shortDefinition)}
-
+              class="definition-text arabic"
+            >
+              ${escapeHtml(
+                term.shortDefinition
+              )}
             </div>
 
 
@@ -1276,11 +1835,17 @@ function detailView(id) {
 
               <div class="tags">
 
-                ${term.keywords.map(keyword => `
-                  <span class="tag">
-                    ${escapeHtml(keyword)}
-                  </span>
-                `).join("")}
+                ${term.keywords
+                  .map(k => `
+
+                    <span class="tag">
+
+                      ${escapeHtml(k)}
+
+                    </span>
+
+                  `)
+                  .join("")}
 
               </div>
 
@@ -1295,22 +1860,25 @@ function detailView(id) {
 
               <div class="related-list">
 
-                ${
-                  related.map(r => `
+                ${related
+                  .map(r => `
 
                     <button
                       class="related-link"
                       data-action="open"
-                      data-id="${r.id}">
+                      data-id="${r.id}"
+                    >
 
                       ${escapeHtml(r.arabic)}
+
                       ·
+
                       ${escapeHtml(r.english)}
 
                     </button>
 
-                  `).join("")
-                }
+                  `)
+                  .join("")}
 
               </div>
 
@@ -1320,18 +1888,23 @@ function detailView(id) {
             <div class="detail-section">
 
               <h3>
-                المصدر
+                المرجع
               </h3>
 
               <p class="definition-text">
                 ${escapeHtml(term.source)}
               </p>
 
+
               <div class="notice">
-                المحتوى الموجود في هذا النموذج تجريبي ولا يُعد استشارة قانونية رسمية.
+
+                محتوى تجريبي لأغراض التدريب والنموذج الأولي.
+                لا يقدم هذا القاموس استشارة قانونية رسمية.
+
               </div>
 
             </div>
+
 
           </div>
 
@@ -1342,81 +1915,105 @@ function detailView(id) {
     </section>
 
   `;
+
 }
 
 
-/* ================= ROUTING ================= */
-
-function setRoute(route) {
-
-  state.route = route;
-  state.query = "";
-  state.category = "All Categories";
-  state.letter = "All";
-  state.letterLanguage = "en";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-  render();
-}
-
-
-/* ================= RENDER ================= */
+/* =========================================================
+   RENDER
+========================================================= */
 
 function render() {
 
   updateSavedCount();
 
+
+  document.documentElement.lang =
+    "ar";
+
+  document.documentElement.dir =
+    "rtl";
+
+  document.body.classList.add("rtl");
+
+
   let html = "";
 
+
   if (state.route === "home") {
-    html = homeView();
+
+    html =
+      homeView();
+
   }
 
   else if (state.route === "results") {
-    html = resultsView();
+
+    html =
+      resultsView();
+
   }
 
   else if (state.route === "browse") {
-    html = browseView();
+
+    html =
+      browseView();
+
   }
 
   else if (state.route === "bookmarks") {
-    html = bookmarksView();
+
+    html =
+      bookmarksView();
+
   }
 
   else if (state.route === "recent") {
-    html = recentView();
+
+    html =
+      recentView();
+
   }
 
-  else if (state.route.startsWith("term/")) {
-    html = detailView(
-      state.route.split("/")[1]
-    );
+  else if (
+    state.route.startsWith("term/")
+  ) {
+
+    html =
+      detailView(
+        state.route.split("/")[1]
+      );
+
   }
 
-  app.innerHTML = html;
+
+  app.innerHTML =
+    html;
+
 
   updateNav();
 
   bindDynamicEvents();
+
 }
 
 
-/* ================= NAV ================= */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 function updateNav() {
 
   document
     .querySelectorAll(".nav-link")
-    .forEach(button => {
+    .forEach(el => {
 
-      button.classList.toggle(
+      el.classList.toggle(
         "active",
-        button.dataset.route === state.route
+
+        el.dataset.route ===
+        state.route
+
       );
 
     });
@@ -1424,179 +2021,297 @@ function updateNav() {
 }
 
 
-/* ================= EVENTS ================= */
+/* =========================================================
+   EVENTS
+========================================================= */
 
 function bindDynamicEvents() {
 
+
+  /* HOME SEARCH */
+
   const homeSearch =
-    document.getElementById("homeSearch");
+    document.getElementById(
+      "homeSearch"
+    );
+
 
   if (homeSearch) {
 
-    homeSearch.addEventListener("submit", e => {
+    homeSearch.addEventListener(
+      "submit",
+      e => {
 
-      e.preventDefault();
+        e.preventDefault();
 
-      state.query =
-        document
-          .getElementById("homeSearchInput")
-          .value
-          .trim();
 
-      state.route = "results";
-      state.letter = "All";
+        state.query =
+          document
+            .getElementById(
+              "homeSearchInput"
+            )
+            .value
+            .trim();
 
-      render();
 
-    });
+        state.route =
+          "results";
+
+
+        state.englishLetter =
+          "الكل";
+
+        state.arabicLetter =
+          "الكل";
+
+
+        render();
+
+      }
+    );
 
   }
 
 
+  /* RESULTS SEARCH */
+
   const resultSearch =
-    document.getElementById("resultSearch");
+    document.getElementById(
+      "resultSearch"
+    );
+
 
   if (resultSearch) {
 
-    resultSearch.addEventListener("input", e => {
+    resultSearch.addEventListener(
+      "input",
+      e => {
 
-      state.query = e.target.value;
+        state.query =
+          e.target.value;
 
-      render();
 
-      const input =
-        document.getElementById("resultSearch");
+        const cursor =
+          e.target.selectionStart;
 
-      if (input) {
 
-        input.focus();
+        render();
 
-        input.setSelectionRange(
-          input.value.length,
-          input.value.length
-        );
+
+        const input =
+          document.getElementById(
+            "resultSearch"
+          );
+
+
+        if (input) {
+
+          input.focus();
+
+          input.setSelectionRange(
+            cursor,
+            cursor
+          );
+
+        }
 
       }
-
-    });
+    );
 
   }
 
 
+  /* CATEGORY */
+
   const categoryFilter =
-    document.getElementById("categoryFilter");
+    document.getElementById(
+      "categoryFilter"
+    );
+
 
   if (categoryFilter) {
 
-    categoryFilter.addEventListener("change", e => {
+    categoryFilter.addEventListener(
+      "change",
+      e => {
 
-      state.category = e.target.value;
+        state.category =
+          e.target.value;
 
-      render();
+        render();
 
-    });
+      }
+    );
 
   }
 
 
   const browseCategory =
-    document.getElementById("browseCategory");
+    document.getElementById(
+      "browseCategory"
+    );
+
 
   if (browseCategory) {
 
-    browseCategory.addEventListener("change", e => {
+    browseCategory.addEventListener(
+      "change",
+      e => {
 
-      state.category = e.target.value;
+        state.category =
+          e.target.value;
 
-      render();
+        render();
 
-    });
+      }
+    );
 
   }
 
 
-  document
-    .getElementById("resetFilters")
-    ?.addEventListener("click", () => {
-
-      state.query = "";
-      state.category = "All Categories";
-      state.letter = "All";
-
-      render();
-
-    });
-
+  /* RESET */
 
   document
-    .getElementById("noResultReset")
-    ?.addEventListener("click", () => {
+    .getElementById(
+      "resetFilters"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
 
-      state.query = "";
-      state.category = "All Categories";
-      state.letter = "All";
+        state.query =
+          "";
 
-      render();
+        state.category =
+          "الكل";
 
-    });
+        state.englishLetter =
+          "الكل";
+
+        state.arabicLetter =
+          "الكل";
+
+        render();
+
+      }
+    );
 
 
   document
-    .querySelectorAll("[data-tab]")
-    .forEach(button => {
+    .getElementById(
+      "noResultReset"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
 
-      button.addEventListener("click", () => {
+        state.query =
+          "";
 
-        document
-          .querySelectorAll("[data-tab]")
-          .forEach(b =>
-            b.classList.remove("active")
+        state.category =
+          "الكل";
+
+        state.englishLetter =
+          "الكل";
+
+        state.arabicLetter =
+          "الكل";
+
+        render();
+
+      }
+    );
+
+
+  /* DEFINITION TABS */
+
+  document
+    .querySelectorAll(
+      "[data-tab]"
+    )
+    .forEach(btn => {
+
+      btn.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              "[data-tab]"
+            )
+            .forEach(
+              b =>
+                b.classList.remove(
+                  "active"
+                )
+            );
+
+
+          btn.classList.add(
+            "active"
           );
 
-        button.classList.add("active");
 
-        const termId =
-          Number(
-            state.route.split("/")[1]
-          );
+          const termId =
+            Number(
+              state.route.split("/")[1]
+            );
 
-        const term = findTerm(termId);
 
-        const content =
-          document.getElementById(
-            "definitionContent"
-          );
+          const term =
+            findTerm(termId);
 
-        if (content && term) {
 
-          content.textContent =
-            button.dataset.tab === "simple"
-              ? term.shortDefinition
-              : term.fullDefinition;
+          const content =
+            document.getElementById(
+              "definitionContent"
+            );
+
+
+          if (
+            content &&
+            term
+          ) {
+
+            content.textContent =
+              btn.dataset.tab ===
+              "simple"
+
+                ? term.shortDefinition
+
+                : term.fullDefinition;
+
+          }
 
         }
-
-      });
+      );
 
     });
 
 }
 
 
-/* ================= SPEECH ================= */
-
-let isSpeaking = false;
+/* =========================================================
+   SPEECH
+   SECOND CLICK STOPS SPEECH
+========================================================= */
 
 function speakTerm(id) {
 
-  const term = findTerm(id);
+  const term =
+    findTerm(id);
 
-  if (!term) return;
 
-  if (!("speechSynthesis" in window)) {
+  if (!term)
+    return;
+
+
+  if (
+    !("speechSynthesis" in window)
+  ) {
 
     showToast(
-      "المتصفح لا يدعم خاصية نطق النص."
+      "النطق غير مدعوم في هذا المتصفح."
     );
 
     return;
@@ -1605,16 +2320,24 @@ function speakTerm(id) {
 
 
   /*
-    الضغط مرة ثانية أثناء النطق = إيقاف
+     If the SAME term is currently speaking,
+     clicking again stops it.
   */
 
-  if (isSpeaking) {
+  if (
+    speechSynthesis.speaking &&
+    state.speakingId ===
+      Number(id)
+  ) {
 
     speechSynthesis.cancel();
 
-    isSpeaking = false;
+    state.speakingId =
+      null;
 
-    showToast("تم إيقاف النطق.");
+    showToast(
+      "تم إيقاف النطق."
+    );
 
     return;
 
@@ -1623,144 +2346,299 @@ function speakTerm(id) {
 
   speechSynthesis.cancel();
 
-  const text =
-    `${term.arabic}. ${term.english}. ${term.shortDefinition}.`;
+
+  const text = `
+
+    ${term.arabic}.
+
+    ${term.english}.
+
+    ${term.shortDefinition}.
+
+  `;
+
 
   const utterance =
-    new SpeechSynthesisUtterance(text);
+    new SpeechSynthesisUtterance(
+      text
+    );
+
 
   const voices =
     speechSynthesis.getVoices();
 
+
   const arabicVoice =
-    voices.find(v =>
-      v.lang?.toLowerCase().startsWith("ar")
+    voices.find(
+      voice =>
+        voice.lang
+          ?.toLowerCase()
+          .startsWith("ar")
     );
 
+
   if (arabicVoice) {
-    utterance.voice = arabicVoice;
+
+    utterance.voice =
+      arabicVoice;
+
   }
 
+
   utterance.lang =
-    arabicVoice?.lang || "ar-EG";
-
-  utterance.rate = 0.9;
-
-
-  utterance.onstart = () => {
-    isSpeaking = true;
-  };
-
-  utterance.onend = () => {
-    isSpeaking = false;
-  };
-
-  utterance.onerror = () => {
-    isSpeaking = false;
-  };
+    arabicVoice?.lang ||
+    "ar-EG";
 
 
-  speechSynthesis.speak(utterance);
+  utterance.rate =
+    0.9;
 
-  showToast("جاري نطق المصطلح... اضغطي مرة أخرى للإيقاف.");
+
+  utterance.onend =
+    () => {
+
+      state.speakingId =
+        null;
+
+    };
+
+
+  utterance.onerror =
+    () => {
+
+      state.speakingId =
+        null;
+
+    };
+
+
+  state.speakingId =
+    Number(id);
+
+
+  speechSynthesis.speak(
+    utterance
+  );
+
+
+  showToast(
+    "جاري نطق المصطلح... اضغطي مرة أخرى للإيقاف."
+  );
+
 }
 
 
-/* ================= GLOBAL CLICK ================= */
+/* =========================================================
+   GLOBAL CLICK HANDLER
+========================================================= */
 
-document.addEventListener("click", e => {
-
-  const routeEl =
-    e.target.closest("[data-route]");
-
-  if (routeEl) {
-
-    e.preventDefault();
-
-    setRoute(routeEl.dataset.route);
-
-    return;
-  }
+document.addEventListener(
+  "click",
+  e => {
 
 
-  const actionEl =
-    e.target.closest("[data-action]");
+    /* ROUTE */
 
-  if (!actionEl) return;
-
-
-  const action =
-    actionEl.dataset.action;
+    const routeEl =
+      e.target.closest(
+        "[data-route]"
+      );
 
 
-  if (action === "open") {
+    if (routeEl) {
 
-    state.route =
-      `term/${actionEl.dataset.id}`;
+      e.preventDefault();
 
-    render();
+      setRoute(
+        routeEl.dataset.route
+      );
 
-  }
-
-
-  else if (action === "save") {
-
-    toggleSaved(
-      actionEl.dataset.id
-    );
-
-  }
-
-
-  else if (action === "speak") {
-
-    speakTerm(
-      actionEl.dataset.id
-    );
-
-  }
-
-
-  else if (action === "letter") {
-
-    state.letter =
-      actionEl.dataset.letter;
-
-    state.letterLanguage =
-      actionEl.dataset.letterLanguage;
-
-    if (state.route === "home") {
-
-      state.query = "";
-      state.category = "All Categories";
-      state.route = "browse";
+      return;
 
     }
 
-    render();
+
+    /* ACTION */
+
+    const actionEl =
+      e.target.closest(
+        "[data-action]"
+      );
+
+
+    if (!actionEl)
+      return;
+
+
+    const action =
+      actionEl.dataset.action;
+
+
+    /* OPEN */
+
+    if (
+      action === "open"
+    ) {
+
+      state.route =
+        `term/${actionEl.dataset.id}`;
+
+      render();
+
+    }
+
+
+    /* SAVE */
+
+    else if (
+      action === "save"
+    ) {
+
+      toggleSaved(
+        actionEl.dataset.id
+      );
+
+    }
+
+
+    /* SPEAK */
+
+    else if (
+      action === "speak"
+    ) {
+
+      speakTerm(
+        actionEl.dataset.id
+      );
+
+    }
+
+
+    /* ENGLISH LETTER */
+
+    else if (
+      action ===
+      "englishLetter"
+    ) {
+
+      state.englishLetter =
+        actionEl.dataset.letter;
+
+
+      state.arabicLetter =
+        "الكل";
+
+
+      if (
+        state.route ===
+        "home"
+      ) {
+
+        state.query =
+          "";
+
+        state.category =
+          "الكل";
+
+        state.route =
+          "browse";
+
+      }
+
+
+      render();
+
+    }
+
+
+    /* ARABIC LETTER */
+
+    else if (
+      action ===
+      "arabicLetter"
+    ) {
+
+      state.arabicLetter =
+        actionEl.dataset.letter;
+
+
+      state.englishLetter =
+        "الكل";
+
+
+      if (
+        state.route ===
+        "home"
+      ) {
+
+        state.query =
+          "";
+
+        state.category =
+          "الكل";
+
+        state.route =
+          "browse";
+
+      }
+
+
+      render();
+
+    }
+
+
+    /* CATEGORY */
+
+    else if (
+      action ===
+      "category"
+    ) {
+
+      state.category =
+        actionEl.dataset.category;
+
+
+      state.englishLetter =
+        "الكل";
+
+      state.arabicLetter =
+        "الكل";
+
+      state.query =
+        "";
+
+      state.route =
+        "results";
+
+
+      render();
+
+    }
 
   }
+);
 
 
-  else if (action === "category") {
+/* =========================================================
+   SPEECH VOICES
+========================================================= */
 
-    state.category =
-      actionEl.dataset.category;
+if (
+  "speechSynthesis" in window &&
+  speechSynthesis.onvoiceschanged !==
+    undefined
+) {
 
-    state.letter = "All";
+  speechSynthesis.onvoiceschanged =
+    () => {};
 
-    state.query = "";
-
-    state.route = "results";
-
-    render();
-
-  }
-
-});
+}
 
 
-/* ================= INIT ================= */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 updateSavedCount();
 
